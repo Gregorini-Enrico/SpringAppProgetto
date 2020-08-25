@@ -25,7 +25,11 @@ public class RecordFile {
 		
 	}
 
-	
+	/**
+	 * Costruttore senza parametri
+	 */
+	public RecordFile() {
+	}
 
 
 	public String getTag() {
