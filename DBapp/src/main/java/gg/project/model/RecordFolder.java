@@ -7,6 +7,10 @@ public class RecordFolder {
 	private String path;
 	private String id;
 	
+	public RecordFolder() {
+		
+	}
+	
 	public RecordFolder (String tag, String name, String path, String id) {
 		this.tag = tag;
 		this.name = name;
