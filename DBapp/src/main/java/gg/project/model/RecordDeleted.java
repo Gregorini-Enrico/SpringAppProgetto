@@ -6,6 +6,8 @@ public class RecordDeleted {
 	private String name;
 	private String path;
 	
+	public RecordDeleted() {}
+	
 	public RecordDeleted (String tag, String name, String path) {
 		this.tag = tag;
 		this.name = name;

@@ -12,7 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 
-public class DeletedFIles {
+public class DeletedFiles {
 	
 	public static void downloadDeletedFiles(String url) {
 

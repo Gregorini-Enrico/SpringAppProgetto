@@ -17,12 +17,14 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class Storage {
 
 	public static void download(String url) {
 
 		url = "https://api.dropboxapi.com/2/files/list_folder";
-		
+		Parser p = null;
 		try {
 
 			HttpURLConnection openConnection = (HttpURLConnection) new URL(url).openConnection();
@@ -56,14 +58,16 @@ public class Storage {
 
 				while ((line = buf.readLine()) != null) {
 					data += line;
-					System.out.println(line);
 				}
 			} finally {
 				in.close();
 			}
-			JSONObject obj = (JSONObject) JSONValue.parseWithException(data);
-			System.out.println("OK");
-		} catch (IOException | ParseException e) {
+			//JSONObject obj = (JSONObject) JSONValue.parseWithException(data);
+			
+			ObjectMapper obj = new ObjectMapper();
+			p = obj.readValue(data, Parser.class);
+			 
+		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
