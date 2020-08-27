@@ -7,17 +7,30 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import gg.project.model.*;
+
 public class DeletedFiles {
 	
 	public static void downloadDeletedFiles(String url) {
 
+		ParserDeleted p = null;
+		ArrayList<Record> records = Storage.download(url);
+		ArrayList<RecordDeleted> dfiles = new ArrayList<RecordDeleted>();
+		for(Record r:records) {
+			if(r.getTag()=="deleted")
+				dfiles.add(((RecordDeleted)r));
+		}
+				
 		url = "https://api.dropboxapi.com/2/files/list_revisions";
-		
+		for(RecordDeleted rd:dfiles) {
 		try {
 
 			HttpURLConnection openConnection = (HttpURLConnection) new URL(url).openConnection();
@@ -28,7 +41,7 @@ public class DeletedFiles {
 			openConnection.setRequestProperty("Accept", "application/json");
 			openConnection.setDoOutput(true);
 			String jsonBody = "{\r\n" + 
-					"    \"path\": \"/Ereditarieta.pdf\",\r\n" + 
+					"    \"path\": \"/"+rd.getName()+"\",\r\n" + 
 					"    \"mode\": \"path\",\r\n" + 
 					"    \"limit\": 10\r\n" + 
 					"}";
@@ -47,20 +60,20 @@ public class DeletedFiles {
 				InputStreamReader inR = new InputStreamReader(in);
 				BufferedReader buf = new BufferedReader(inR);
 
-				while ((line = buf.readLine()) != null) {
+				while ((line = buf.readLine()) != null) 
 					data += line;
-					System.out.println(line);
-				}
 			} finally {
 				in.close();
 			}
-			JSONObject obj = (JSONObject) JSONValue.parseWithException(data);
-			System.out.println("OK");
-		} catch (IOException | ParseException e) {
+			
+			ObjectMapper obj = new ObjectMapper();
+			p = obj.readValue(data, ParserDeleted.class);
+			
+		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	}
 }

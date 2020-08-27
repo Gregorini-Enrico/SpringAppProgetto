@@ -2,9 +2,6 @@ package gg.project.model;
 
 public class RecordFile extends Record{
 	
-	private String tag;
-	private String name;
-	private String path_lower;
 	private String id;
 	private String client_modified;
 	private String rev;

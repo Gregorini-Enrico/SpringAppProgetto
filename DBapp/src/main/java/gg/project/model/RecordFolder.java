@@ -2,9 +2,7 @@ package gg.project.model;
 
 public class RecordFolder extends Record{
 	
-	private String tag;
-	private String name;
-	private String path_lower;
+
 	private String id;
 	
 	public RecordFolder() {	}
