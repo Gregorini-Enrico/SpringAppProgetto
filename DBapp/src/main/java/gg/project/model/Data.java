@@ -9,15 +9,33 @@ import org.json.JSONObject;
 import gg.project.Storage.Parser;
 
 public class Data {
+	
+	public static ArrayList<Record> getRecords(Parser p){
+   	 Record r = null;
+   	 ArrayList <Record> records = new ArrayList<Record>();
+   	 if(p.entries.size() > 0)
+   		 for(HashMap<String,Object> rf : p.entries) {
+   			 r = new Record();
+   			 r.setTag((String)rf.get("tag"));			 
+   			 r.setName((String)rf.get("name"));
+   			 r.setPath_lower((String)rf.get("path_lower"));
+   		     records.add(r);
+   		 }
+   	 return records;
+    }
+	
+	
+	
+	
 	/**
 	 * Metodo che estrae i dati richiesti dall'api e li inserisce in una lista di File
 	 * 
 	 */
-     public static List<RecordFolder> getFolder(Parser p){
+     /*public static ArrayList<RecordFolder> getFolder(Parser p){
     	 RecordFolder f = null;
-    	 List <RecordFolder> folders = new ArrayList<RecordFolder>();
-    	 if(p.folders.size() > 0)
-    		 for(HashMap<String,Object> rf : p.folders) {
+    	 ArrayList <RecordFolder> folders = new ArrayList<RecordFolder>();
+    	 if(p.entries.size() > 0)
+    		 for(HashMap<String,Object> rf : p.entries) {
     			 f = new RecordFolder();
     			 f.setTag((String)rf.get("tag"));			 
     			 f.setName((String)rf.get("name"));
@@ -59,6 +77,6 @@ public class Data {
     		     Dfiles.add(f);
     		 }
     	 return Dfiles;
-     }
+     }*/
 
 }

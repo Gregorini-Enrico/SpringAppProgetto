@@ -1,45 +1,17 @@
 package gg.project.model;
 
-public class RecordFolder {
+public class RecordFolder extends Record{
 	
 	private String tag;
 	private String name;
-	private String path;
+	private String path_lower;
 	private String id;
 	
-	public RecordFolder() {
-		
-	}
+	public RecordFolder() {	}
 	
-	public RecordFolder (String tag, String name, String path, String id) {
-		this.tag = tag;
-		this.name = name;
-		this.path = path;
+	public RecordFolder (String tag, String name, String path_lower, String id) {
+		super(name, tag, path_lower);
 		this.id = id;
-	}
-
-	public String getTag() {
-		return tag;
-	}
-
-	public void setTag(String tag) {
-		this.tag = tag;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
 	}
 
 	public String getId() {

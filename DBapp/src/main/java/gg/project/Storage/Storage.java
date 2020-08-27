@@ -11,6 +11,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -19,9 +20,11 @@ import org.json.simple.parser.ParseException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import gg.project.model.*;
+
 public class Storage {
 
-	public static void download(String url) {
+	public static ArrayList<Record> download(String url) {
 
 		url = "https://api.dropboxapi.com/2/files/list_folder";
 		Parser p = null;
@@ -72,5 +75,6 @@ public class Storage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return Data.getRecords(p);
 	}
 }
