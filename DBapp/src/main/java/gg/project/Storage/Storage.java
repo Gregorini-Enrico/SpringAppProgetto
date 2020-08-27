@@ -21,6 +21,7 @@ import org.json.simple.parser.ParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import gg.project.model.*;
+import gg.project.model.Record;
 
 public class Storage {
 
@@ -53,23 +54,23 @@ public class Storage {
 
 			InputStream in = openConnection.getInputStream();
 
-			String data = "";
+			String data = ""; 
 			String line = "";
 			try {
 				InputStreamReader inR = new InputStreamReader(in);
 				BufferedReader buf = new BufferedReader(inR);
 
 				while ((line = buf.readLine()) != null) {
-					data += line;
+					data += line; 							//tutti i dati presi dall'API in stringa
 				}
 			} finally {
 				in.close();
 			}
 			//JSONObject obj = (JSONObject) JSONValue.parseWithException(data);
 			
-			ObjectMapper obj = new ObjectMapper();
-			p = obj.readValue(data, Parser.class);
-			 
+			ObjectMapper obj = new ObjectMapper();		//inizializzo ObjectMapper
+			p = obj.readValue(data, Parser.class);		//Effettuo il parsing dei dati attraverso obj (passando data)
+			 											//e inserisco i dati dentro il parser (parser.class)
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {

@@ -16,19 +16,20 @@ import org.json.simple.parser.ParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import gg.project.model.*;
+import gg.project.model.Record;
 
 public class DeletedFiles {
 	
-	public static void downloadDeletedFiles(String url) {
+	public static ArrayList<RecordDeleted> downloadDeletedFiles(String url) {
 
-		ParserDeleted p = null;
+		DeletedParser dp = null;
 		ArrayList<Record> records = Storage.download(url);
 		ArrayList<RecordDeleted> dfiles = new ArrayList<RecordDeleted>();
 		for(Record r:records) {
 			if(r.getTag()=="deleted")
 				dfiles.add(((RecordDeleted)r));
 		}
-				
+
 		url = "https://api.dropboxapi.com/2/files/list_revisions";
 		for(RecordDeleted rd:dfiles) {
 		try {
@@ -67,13 +68,14 @@ public class DeletedFiles {
 			}
 			
 			ObjectMapper obj = new ObjectMapper();
-			p = obj.readValue(data, ParserDeleted.class);
+			dp = obj.readValue(data, DeletedParser.class);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	}
+	}	
+		return Data.getRecordsDeleted(dp);	
+  }
 }

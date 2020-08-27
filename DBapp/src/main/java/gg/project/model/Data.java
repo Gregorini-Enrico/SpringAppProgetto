@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.json.JSONObject;
 
+import gg.project.Storage.DeletedParser;
 import gg.project.Storage.Parser;
 
 public class Data {
@@ -16,11 +17,11 @@ public class Data {
 	 */
 	public static ArrayList<Record> getRecords(Parser p){
    	 Record r = null;
-   	 ArrayList <Record> records = new ArrayList<Record>();
+   	 ArrayList<Record> records = new ArrayList<Record>();
    	 if(p.entries.size() > 0)
    		 for(HashMap<String,Object> rf : p.entries) {
    			 r = new Record();
-   			 r.setTag((String)rf.get("tag"));			 
+   			 r.setTag((String)rf.get("tag"));
    			 r.setName((String)rf.get("name"));
    			 r.setPath_lower((String)rf.get("path_lower"));
    			 if(r.getTag()=="folder")
@@ -33,9 +34,29 @@ public class Data {
    			 }
    			 else if(r.getTag()=="deleted")
    				 r = new RecordDeleted();
+   			 
    		     records.add(r);
    		 }
    	 return records;
     }
+
+	public static ArrayList<RecordDeleted> getRecordsDeleted(DeletedParser dp){
+		RecordDeleted rd = null;
+	   	 ArrayList<RecordDeleted> recordsdeleted = new ArrayList<RecordDeleted>();
+	   	 if(dp.entries.size() > 0)
+	   		 for(HashMap<String,Object> rf : dp.entries) {
+	   			 rd = new RecordDeleted();
+	   			 rd.setTag((String)rf.get("tag"));
+	   			 rd.setName((String)rf.get("name"));
+	   			 rd.setPath_lower((String)rf.get("path_lower"));
+	   			 rd.setId((String)rf.get("id"));
+	   			 rd.setClient_modified((String)rf.get("client_modified"));
+	   			 rd.setRev((String)rf.get("rev"));
+	   			 rd.setSize((int)rf.get("size"));
+	   			 recordsdeleted.add(rd);
+	   		 }
+	   	 return recordsdeleted;
+	    }
+
   
 }

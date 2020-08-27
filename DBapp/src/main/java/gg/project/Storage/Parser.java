@@ -6,6 +6,5 @@ import java.util.List;
 public class Parser {
 	public List<HashMap<String,Object>> entries;
 	public String cursor;
-	public Boolean has_more;
-
+	public boolean has_more;
 }
