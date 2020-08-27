@@ -20,17 +20,17 @@ import gg.project.model.Record;
 
 public class DeletedFiles {
 	
-	public static ArrayList<RecordDeleted> downloadDeletedFiles(String url) {
+	public static ArrayList<RecordDeleted> downloadDeletedFiles() {
 
 		DeletedParser dp = null;
-		ArrayList<Record> records = Storage.download(url);
+		ArrayList<Record> records = Storage.download();
 		ArrayList<RecordDeleted> dfiles = new ArrayList<RecordDeleted>();
 		for(Record r:records) {
 			if(r.getTag()=="deleted")
 				dfiles.add(((RecordDeleted)r));
 		}
 
-		url = "https://api.dropboxapi.com/2/files/list_revisions";
+		String url = "https://api.dropboxapi.com/2/files/list_revisions";
 		for(RecordDeleted rd:dfiles) {
 		try {
 

@@ -44,8 +44,5 @@ public class RecordDeleted extends Record{
 	public void setSize(int size) {
 		this.size = size;
 	}
-
 	
-	
-		
 }

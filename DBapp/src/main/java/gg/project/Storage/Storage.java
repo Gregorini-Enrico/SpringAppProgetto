@@ -25,9 +25,9 @@ import gg.project.model.Record;
 
 public class Storage {
 
-	public static ArrayList<Record> download(String url) {
+	public static ArrayList<Record> download() {
 
-		url = "https://api.dropboxapi.com/2/files/list_folder";
+		String url = "https://api.dropboxapi.com/2/files/list_folder";
 		Parser p = null;
 		try {
 
