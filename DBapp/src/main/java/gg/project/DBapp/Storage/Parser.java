@@ -1,4 +1,4 @@
-package gg.project.Storage;
+package gg.project.DBapp.Storage;
 
 import java.util.HashMap;
 import java.util.List;

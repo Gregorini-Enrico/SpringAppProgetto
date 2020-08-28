@@ -1,27 +1,18 @@
-package gg.project.model;
+package gg.project.DBapp.model;
 
-public class RecordFile extends Record{
+public class RecordDeleted extends Record{
 	
 	private String id;
 	private String client_modified;
 	private String rev;
-	private int size;	
+	private int size;
 	
-	/**
-	 * Costruttore senza parametri
-	 */
-	public RecordFile() {}
-	
-	public RecordFile (String name, String tag, String path_lower, String id, String client_modified, String rev, int size) 
-	{
+	public RecordDeleted() {}
+
+	public RecordDeleted(String name, String tag, String path_lower) {
 		super(name, tag, path_lower);
-		this.id = id;
-		this.client_modified = client_modified;
-		this.rev = rev;
-		this.size = size;
-		
 	}
-	
+
 	public String getId() {
 		return id;
 	}
@@ -53,4 +44,5 @@ public class RecordFile extends Record{
 	public void setSize(int size) {
 		this.size = size;
 	}
+	
 }

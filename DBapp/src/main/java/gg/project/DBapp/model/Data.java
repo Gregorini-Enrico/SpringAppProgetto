@@ -1,13 +1,10 @@
-package gg.project.model;
+package gg.project.DBapp.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import org.json.JSONObject;
-
-import gg.project.Storage.DeletedParser;
-import gg.project.Storage.Parser;
+import gg.project.DBapp.Storage.DeletedParser;
+import gg.project.DBapp.Storage.Parser;
 
 public class Data {
 	
@@ -21,7 +18,7 @@ public class Data {
    	 if(p.entries.size() > 0)
    		 for(HashMap<String,Object> rf : p.entries) {
    			 r = new Record();
-   			 r.setTag((String)rf.get("tag"));
+   			 r.setTag((String)rf.get(".tag"));
    			 r.setName((String)rf.get("name"));
    			 r.setPath_lower((String)rf.get("path_lower"));
    			 if(r.getTag()=="folder")
@@ -40,13 +37,14 @@ public class Data {
    	 return records;
     }
 
-	public static ArrayList<RecordDeleted> getRecordsDeleted(DeletedParser dp){
+	public static ArrayList<RecordDeleted> getRecordsDeleted(DeletedParser[] dp){
 		RecordDeleted rd = null;
 	   	 ArrayList<RecordDeleted> recordsdeleted = new ArrayList<RecordDeleted>();
-	   	 if(dp.entries.size() > 0)
-	   		 for(HashMap<String,Object> rf : dp.entries) {
+	   	 int i=0;
+	   	 if(dp[i].entries.size() > 0)
+	   		 for(HashMap<String,Object> rf : dp[i].entries) {
 	   			 rd = new RecordDeleted();
-	   			 rd.setTag((String)rf.get("tag"));
+	   			 rd.setTag((String)rf.get(".tag"));
 	   			 rd.setName((String)rf.get("name"));
 	   			 rd.setPath_lower((String)rf.get("path_lower"));
 	   			 rd.setId((String)rf.get("id"));
@@ -54,6 +52,7 @@ public class Data {
 	   			 rd.setRev((String)rf.get("rev"));
 	   			 rd.setSize((int)rf.get("size"));
 	   			 recordsdeleted.add(rd);
+	   			 i++;
 	   		 }
 	   	 return recordsdeleted;
 	    }

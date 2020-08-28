@@ -1,4 +1,4 @@
-package gg.project.Storage;
+package gg.project.DBapp.Storage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,22 +6,17 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.URI;
+import java.util.ArrayList;
 import java.net.URL;
+/*import java.net.URI;
 import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-import org.json.simple.parser.ParseException;
+import org.json.simple.parser.ParseException;*/
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import gg.project.model.*;
-import gg.project.model.Record;
+import gg.project.DBapp.model.*;
 
 public class Storage {
 
@@ -34,7 +29,7 @@ public class Storage {
 			HttpURLConnection openConnection = (HttpURLConnection) new URL(url).openConnection();
 			openConnection.setRequestMethod("POST");
 			openConnection.setRequestProperty("Authorization",
-					"Bearer -VLBD1Cvt5UAAAAAAAAAAZXMyJ0knLSi8qnXozJyG6dcZ5JsHuifhTCE8ypMd1n_");
+					"Bearer TTT_mp4F8uIAAAAAAAAAAfg7FoYwmgEPuELIrV7zBJvObmJE_0MO9HTvN1uB2SB7");
 			openConnection.setRequestProperty("Content-Type", "application/json");
 			openConnection.setRequestProperty("Accept", "application/json");
 			openConnection.setDoOutput(true);

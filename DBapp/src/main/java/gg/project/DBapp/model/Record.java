@@ -1,4 +1,4 @@
-package gg.project.model;
+package gg.project.DBapp.model;
 
 public class Record {
         private String name;
