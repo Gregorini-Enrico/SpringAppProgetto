@@ -13,12 +13,14 @@ import java.util.ArrayList;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import gg.project.DBapp.model.*;
+import gg.project.DBapp.model.Record;
 
 public class DeletedFiles {
 	
 	public static ArrayList<RecordDeleted> downloadDeletedFiles() {
-
-		DeletedParser[] dp = new DeletedParser[100];   int i = 0;
+		
+		int i = 0;
+		DeletedParser[] dp = new DeletedParser[100];
 		ArrayList<Record> records = Storage.download();
 		ArrayList<RecordDeleted> dfiles = new ArrayList<RecordDeleted>();
 		for(Record r:records) {

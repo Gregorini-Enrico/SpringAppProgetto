@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import gg.project.DBapp.Storage.DeletedParser;
 import gg.project.DBapp.Storage.Parser;
+import gg.project.DBapp.Storage.RestoreParser;
 
 public class Data {
 	
@@ -56,6 +57,26 @@ public class Data {
 	   		 }
 	   	 return recordsdeleted;
 	    }
-
-  
 }
+	
+	/*
+	public static ArrayList<RecordDeleted> getRecordsRestore(RestoreParser rp){
+
+		RecordDeleted rd = null;
+	   	ArrayList<RecordDeleted> recordsdeleted = new ArrayList<RecordDeleted>();
+
+	   		 for(HashMap<String,Object> rf : rp) {
+	   			 rd = new RecordDeleted();
+	   			 rd.setTag((String)rf.get(".tag"));
+	   			 rd.setName((String)rf.get("name"));
+	   			 rd.setPath_lower((String)rf.get("path_lower"));
+	   			 rd.setId((String)rf.get("id"));
+	   			 rd.setClient_modified((String)rf.get("client_modified"));
+	   			 rd.setRev((String)rf.get("rev"));
+	   			 rd.setSize((int)rf.get("size"));
+	   			 recordsdeleted.add(rd);
+	   		
+	   	 return recordsdeleted;
+	    }  
+}
+	*/

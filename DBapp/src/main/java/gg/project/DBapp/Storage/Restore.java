@@ -6,25 +6,25 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.util.ArrayList;
 import java.net.URL;
-/*import java.net.URI;
-import java.net.URLConnection;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import org.json.simple.parser.ParseException;*/
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import gg.project.DBapp.model.*;
-import gg.project.DBapp.model.Record;
 
-public class Storage {
+public class Restore {
+	
+	public static ArrayList<RecordDeleted> restore() {
+		
+		ArrayList<RecordDeleted> dfiles = DeletedFiles.downloadDeletedFiles();
+		RestoreParser resp = null;
 
-	public static ArrayList<Record> download() {
-
-		String url = "https://api.dropboxapi.com/2/files/list_folder";
-		Parser p = null;
+		String url = "https://api.dropboxapi.com/2/files/restore";
+		
+		for(RecordDeleted rd:dfiles) {
 		try {
 
 			HttpURLConnection openConnection = (HttpURLConnection) new URL(url).openConnection();
@@ -35,11 +35,8 @@ public class Storage {
 			openConnection.setRequestProperty("Accept", "application/json");
 			openConnection.setDoOutput(true);
 			String jsonBody = "{\r\n" + 
-					"    \"path\": \"\",\r\n" + 
-					"    \"recursive\": true,\r\n" + 
-					"    \"include_media_info\": true,\r\n" + 
-					"    \"include_deleted\": true,\r\n" + 
-					"    \"include_mounted_folders\": true\r\n" + 
+					"   \"path\": \"/"+rd.getPath_lower().substring(1)+"\",\r\n" +
+					"	\"rev\": \""+rd.getRev()+"\"\r\n" + 
 					"}";
 			
 
@@ -57,21 +54,25 @@ public class Storage {
 				BufferedReader buf = new BufferedReader(inR);
 
 				while ((line = buf.readLine()) != null) {
-					data += line; 							//tutti i dati presi dall'API in stringa
+					data += line; 							
 				}
 			} finally {
 				in.close();
 			}
 			//JSONObject obj = (JSONObject) JSONValue.parseWithException(data);
 			
-			ObjectMapper obj = new ObjectMapper();		//inizializzo ObjectMapper
-			p = obj.readValue(data, Parser.class);		//Effettuo il parsing dei dati attraverso obj (passando data)
-			 											//e inserisco i dati dentro il parser (parser.class)
+			ObjectMapper obj = new ObjectMapper();		
+			resp = obj.readValue(data, RestoreParser.class);		
+		
+		
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return Data.getRecords(p);
+		
+		}
+		//return Data.getRecordsDeleted(resp);
 	}
+
 }
