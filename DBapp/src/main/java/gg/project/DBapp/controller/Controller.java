@@ -40,6 +40,11 @@ public class Controller {
 		return new ResponseEntity<>(service.getMetadata(), HttpStatus.OK);
 	}
 	
-	
+	@RequestMapping(value="/restore", method = RequestMethod.POST)
+	public ResponseEntity<String> FileRestore(@RequestParam (name ="name",defaultValue = "Ereditarieta.pdf") String name){
+	    service.RestoreFile(name);
+	    return new ResponseEntity("File restored", HttpStatus.OK);
+	    
+	}
 	
 }
