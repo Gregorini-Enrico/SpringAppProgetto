@@ -13,7 +13,6 @@ public class Metadata {
 		metadata.put("client_modified", "informazioni (data, ora) sulla modifica del file su DB");
 		metadata.put("rev", "codice univoco per ogni tipologia di file(.txt, .pdf, .docx ecc) per il restore");
 		metadata.put("size", "dimensione del file in byte");
-		
 		return metadata;
 	}
 }

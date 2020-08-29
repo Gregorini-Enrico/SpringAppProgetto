@@ -17,7 +17,7 @@ import gg.project.DBapp.model.*;
 
 public class Restore {
 	
-	public static ArrayList<RecordDeleted> restore() {
+	/*public static ArrayList<RecordDeleted> restore() {
 		
 		ArrayList<RecordDeleted> dfiles = DeletedFiles.downloadDeletedFiles();
 		RestoreParser resp = null;
@@ -73,6 +73,6 @@ public class Restore {
 		
 		}
 		//return Data.getRecordsDeleted(resp);
-	}
+	}*/
 
 }

@@ -38,14 +38,15 @@ public class Data {
    	 return records;
     }
 
-	public static ArrayList<RecordDeleted> getRecordsDeleted(DeletedParser[] dp){
-		RecordDeleted rd = null;
+	public static ArrayList<RecordDeleted> getRecordsDeleted(ArrayList<DeletedParser> dp){
+		 RecordDeleted rd = null;
 	   	 ArrayList<RecordDeleted> recordsdeleted = new ArrayList<RecordDeleted>();
-	   	 int i=0;
-	   	 if(dp[i].entries.size() > 0)
-	   		 for(HashMap<String,Object> rf : dp[i].entries) {
+	   	 
+	   	   for(int k=0; k<dp.size(); k++) {
+	  	   	 if(dp.get(k).entries.size() > 0)
+	   		 for(HashMap<String,Object> rf : dp.get(k).entries) {
 	   			 rd = new RecordDeleted();
-	   			 rd.setTag((String)rf.get(".tag"));
+	   			 rd.setTag("deleted");
 	   			 rd.setName((String)rf.get("name"));
 	   			 rd.setPath_lower((String)rf.get("path_lower"));
 	   			 rd.setId((String)rf.get("id"));
@@ -53,8 +54,8 @@ public class Data {
 	   			 rd.setRev((String)rf.get("rev"));
 	   			 rd.setSize((int)rf.get("size"));
 	   			 recordsdeleted.add(rd);
-	   			 i++;
 	   		 }
+	   	   }
 	   	 return recordsdeleted;
 	    }
 }

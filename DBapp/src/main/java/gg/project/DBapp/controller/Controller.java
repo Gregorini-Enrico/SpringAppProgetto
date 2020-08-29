@@ -35,10 +35,10 @@ public class Controller {
 	}
 	
 	
-	/*@RequestMapping(value="/metadata", method = RequestMethod.GET)
+	@RequestMapping(value="/metadata", method = RequestMethod.GET)
 	public ResponseEntity<Object> getMetadata(){
-		return new ResponseEntity<>();
-	}*/
+		return new ResponseEntity<>(service.getMetadata(), HttpStatus.OK);
+	}
 	
 	
 	
