@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import gg.project.DBapp.Stats.Statistics;
 import gg.project.DBapp.Storage.*;
 import gg.project.DBapp.model.*;
 import gg.project.DBapp.service.PrincipalService;
@@ -40,11 +41,15 @@ public class Controller {
 		return new ResponseEntity<>(service.getMetadata(), HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/statistics/media", method = RequestMethod.GET)
+	public float getMedia(){
+		return Statistics.mediaDeletedFile(DeletedFiles.downloadDeletedFiles());
+	}
+	
 	@RequestMapping(value="/restore", method = RequestMethod.POST)
 	public ResponseEntity<String> FileRestore(@RequestParam (name ="name",defaultValue = "Ereditarieta.pdf") String name){
 	    service.RestoreFile(name);
 	    return new ResponseEntity<>("File restored", HttpStatus.OK);
-	    
 	}
 	
 }
