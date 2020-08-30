@@ -1,7 +1,10 @@
 package gg.project.DBapp.Restore;
 
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -20,7 +23,7 @@ public class Restore {
 		String url = "https://api.dropboxapi.com/2/files/restore";
 		RecordDeleted RecordtoRestore = null;
 		for(RecordDeleted rd:dfiles) 
-			if(rd.getName()==name)
+			if(rd.getName().contains(name))
 				RecordtoRestore = rd;
 	
 		try {
@@ -41,6 +44,21 @@ public class Restore {
 			try (OutputStream os = openConnection.getOutputStream()) {
 				byte[] input = jsonBody.getBytes("utf-8");
 				os.write(input, 0, input.length);
+			}
+			
+			InputStream in = openConnection.getInputStream();
+
+			String data = ""; 
+			String line = "";
+			try {
+				InputStreamReader inR = new InputStreamReader(in);
+				BufferedReader buf = new BufferedReader(inR);
+
+				while ((line = buf.readLine()) != null) {
+					data += line; 							//tutti i dati presi dall'API in stringa
+				}
+			} finally {
+				in.close();
 			}
 		
 		} catch (IOException e) {

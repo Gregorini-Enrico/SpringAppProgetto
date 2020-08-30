@@ -62,7 +62,6 @@ public class Storage {
 			} finally {
 				in.close();
 			}
-			//JSONObject obj = (JSONObject) JSONValue.parseWithException(data);
 			
 			ObjectMapper obj = new ObjectMapper();		//inizializzo ObjectMapper
 			p = obj.readValue(data, Parser.class);		//Effettuo il parsing dei dati attraverso obj (passando data)
