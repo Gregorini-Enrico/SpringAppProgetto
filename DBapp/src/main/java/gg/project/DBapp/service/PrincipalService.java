@@ -4,8 +4,7 @@ import java.util.*;
 
 import gg.project.DBapp.Storage.*;
 import gg.project.DBapp.model.Metadata;
-import gg.project.DBapp.model.Record;
-import gg.project.DBapp.model.RecordDeleted;
+import gg.project.DBapp.model.*;
 import gg.project.DBapp.Restore.*;
 
 @org.springframework.stereotype.Service

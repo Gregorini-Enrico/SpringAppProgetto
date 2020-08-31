@@ -57,26 +57,25 @@ public class Data {
 	   	   }
 	   	 return recordsdeleted;
 	    }
+	
+	 public static ArrayList<RecordFile> getOnlyFile(Parser p){
+		 RecordFile file = null;
+	   	 ArrayList<RecordFile> files = new ArrayList<RecordFile>();
+	   	 if(p.entries.size() > 0)
+	   		 for(HashMap<String,Object> rf : p.entries) {
+	   			 file = new RecordFile();
+	   			 file.setTag((String)rf.get(".tag"));
+	   			if(file.getTag().equals("file")) {
+	   			 file.setName((String)rf.get("name"));
+	   			 file.setPath_lower((String)rf.get("path_lower"));
+	   			 file.setId((String)rf.get("id"));
+	   			 file.setClient_modified((String)rf.get("client_modified"));
+	   			 file.setRev((String)rf.get("rev"));
+	   			 file.setSize((int)rf.get("size"));
+	   			 files.add(file);
+	   			 }
+	   		 }
+	   	 return files;
+		 }
 }
 	
-	/*
-	public static ArrayList<RecordDeleted> getRecordsRestore(RestoreParser rp){
-
-		RecordDeleted rd = null;
-	   	ArrayList<RecordDeleted> recordsdeleted = new ArrayList<RecordDeleted>();
-
-	   		 for(HashMap<String,Object> rf : rp) {
-	   			 rd = new RecordDeleted();
-	   			 rd.setTag((String)rf.get(".tag"));
-	   			 rd.setName((String)rf.get("name"));
-	   			 rd.setPath_lower((String)rf.get("path_lower"));
-	   			 rd.setId((String)rf.get("id"));
-	   			 rd.setClient_modified((String)rf.get("client_modified"));
-	   			 rd.setRev((String)rf.get("rev"));
-	   			 rd.setSize((int)rf.get("size"));
-	   			 recordsdeleted.add(rd);
-	   		
-	   	 return recordsdeleted;
-	    }  
-}
-	*/
