@@ -5,14 +5,14 @@ public class RecordFile extends Record{
 	private String id;
 	private String client_modified;
 	private String rev;
-	private int size;	
+	private double size;	
 	
 	/**
 	 * Costruttore senza parametri
 	 */
 	public RecordFile() {}
 	
-	public RecordFile (String name, String tag, String path_lower, String id, String client_modified, String rev, int size) 
+	public RecordFile (String name, String tag, String path_lower, String id, String client_modified, String rev, double size) 
 	{
 		super(name, tag, path_lower);
 		this.id = id;
@@ -46,11 +46,11 @@ public class RecordFile extends Record{
 		this.rev = rev;
 	}
 
-	public int getSize() {
+	public double getSize() {
 		return size;
 	}
 
-	public void setSize(int size) {
+	public void setSize(double size) {
 		this.size = size;
 	}
 }

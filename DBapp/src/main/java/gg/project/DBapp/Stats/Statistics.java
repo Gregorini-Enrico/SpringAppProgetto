@@ -3,6 +3,7 @@ package gg.project.DBapp.Stats;
 import static org.hamcrest.CoreMatchers.containsString;
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 import gg.project.DBapp.model.*;
 
@@ -63,15 +64,32 @@ public class Statistics {
 		return max; //ritorno il file con dimensione massima in B
 	}
 	
+	public static RecordFile minDimFile(List<RecordFile> records) {
+		RecordFile max = records.get(0);
+		for(RecordFile r:records) 
+			if(r.getSize()<max.getSize())
+				max = r; 
+		return max; //ritorno il file con dimensione massima
+	}
+	
+	public static RecordDeleted minDimFileDeleted(List<RecordDeleted> Drecords) {
+		RecordDeleted max = Drecords.get(0);
+		for(RecordDeleted r:Drecords) 
+			if(r.getSize()<max.getSize())
+				max = r; //calcolo la dimensione in B
+		return max; //ritorno il file con dimensione massima in B
+	}
+	
 	public static HashMap<String, Integer> getFileType(List<RecordFile> records){
 		HashMap<String, Integer> type = new HashMap<String, Integer>();
-		String[] format = new String[2];
 		for(Record r:records) {
-			int i=0;
-			format = r.getName().split(".");
-			if(type.containsKey(format[format.length]))
-				i = type.get(format[format.length])+1;
-			else type.put(format[format.length], i++);
+			Integer i=0;
+			String[] format = r.getName().split(Pattern.quote("."));
+			if(type.containsKey(format[format.length-1])) {
+				i = type.get(format[format.length-1])+1;
+				type.put(format[format.length-1], i);
+			}
+			else type.put(format[format.length-1], ++i);
 		}
 		return type;
 	}

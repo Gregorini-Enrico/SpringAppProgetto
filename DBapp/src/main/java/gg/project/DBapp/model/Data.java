@@ -1,8 +1,6 @@
 package gg.project.DBapp.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import java.util.*;
 import gg.project.DBapp.Storage.DeletedParser;
 import gg.project.DBapp.Storage.Parser;
 

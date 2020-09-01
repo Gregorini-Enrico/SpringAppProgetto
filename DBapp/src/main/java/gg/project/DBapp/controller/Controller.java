@@ -58,6 +58,15 @@ public class Controller {
 		return new ResponseEntity<>(Statistics.maxDimFile(Storage.downloadFile()), HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/statistics/minDeleted", method = RequestMethod.GET)
+	public ResponseEntity<Object> getDMin(){
+		return new ResponseEntity<>(Statistics.minDimFileDeleted(DeletedFiles.downloadDeletedFiles()), HttpStatus.OK);	}
+	
+	@RequestMapping(value="/statistics/min", method = RequestMethod.GET)
+	public ResponseEntity<Object> getMin(){
+		return new ResponseEntity<>(Statistics.minDimFile(Storage.downloadFile()), HttpStatus.OK);
+	}
+	
 	@RequestMapping(value="/statistics/type", method = RequestMethod.GET)
 	public ResponseEntity<Object> getType(){
 		return new ResponseEntity<>(Statistics.getFileType(Storage.downloadFile()), HttpStatus.OK);

@@ -5,7 +5,7 @@ public class RecordDeleted extends Record{
 	private String id;
 	private String client_modified;
 	private String rev;
-	private int size;
+	private double size;
 	
 	public RecordDeleted() {}
 
@@ -37,11 +37,11 @@ public class RecordDeleted extends Record{
 		this.rev = rev;
 	}
 
-	public int getSize() {
+	public double getSize() {
 		return size;
 	}
 
-	public void setSize(int size) {
+	public void setSize(double size) {
 		this.size = size;
 	}
 	
