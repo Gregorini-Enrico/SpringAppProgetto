@@ -1,6 +1,5 @@
 package gg.project.DBapp.Stats;
 
-import static org.hamcrest.CoreMatchers.containsString;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -61,7 +60,7 @@ public class Statistics {
 		for(RecordDeleted r:Drecords) 
 			if(r.getSize()>max.getSize())
 				max = r; //calcolo la dimensione in B
-		return max; //ritorno il file con dimensione massima in B
+		return max; //ritorno il file con dimensione massima in KB
 	}
 	
 	public static RecordFile minDimFile(List<RecordFile> records) {
@@ -81,6 +80,20 @@ public class Statistics {
 	}
 	
 	public static HashMap<String, Integer> getFileType(List<RecordFile> records){
+		HashMap<String, Integer> type = new HashMap<String, Integer>();
+		for(Record r:records) {
+			Integer i=0;
+			String[] format = r.getName().split(Pattern.quote("."));
+			if(type.containsKey(format[format.length-1])) {
+				i = type.get(format[format.length-1])+1;
+				type.put(format[format.length-1], i);
+			}
+			else type.put(format[format.length-1], ++i);
+		}
+		return type;
+	}
+	
+	public static HashMap<String, Integer> getDeletedFileType(List<RecordDeleted> records){
 		HashMap<String, Integer> type = new HashMap<String, Integer>();
 		for(Record r:records) {
 			Integer i=0;

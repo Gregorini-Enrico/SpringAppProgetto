@@ -1,6 +1,5 @@
 package gg.project.DBapp.Filter;
 
-import java.io.FileNotFoundException;
 import java.util.*;
 
 import gg.project.DBapp.Exception.TypeNotFoundException;
@@ -14,7 +13,14 @@ public class TypeFilter {
            */
 	      public TypeFilter() {}
 	      
-	      public List<RecordDeleted> type(List<RecordDeleted> records, String type) {
+	      
+	      /**
+	       * metodo che restituisce tutti i file del tipo definito dalla variabile type
+	       * @param records
+	       * @param type
+	       * @return
+	       */
+	      public static List<RecordDeleted> type(List<RecordDeleted> records, String type) {
 	    	  records.removeIf(r->(!r.getName().contains(type)));
 	    	  if(records.isEmpty()) throw new TypeNotFoundException();
 	    	  return records;
