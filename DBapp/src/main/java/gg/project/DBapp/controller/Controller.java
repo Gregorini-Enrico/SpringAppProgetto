@@ -78,13 +78,14 @@ public class Controller {
 	
 	@RequestMapping(value="/restore", method = RequestMethod.POST)
 	public ResponseEntity<String> FileRestore(@RequestBody String filter){
-	    service.RestoreFile(filter);
-	    return new ResponseEntity<>("File restored", HttpStatus.OK);
+	    if(service.RestoreFile(filter))
+	         return new ResponseEntity<>("File restored", HttpStatus.OK);
+	    else return new ResponseEntity<>("L'operazione non è avvenuta con successo!", HttpStatus.BAD_REQUEST);
 	}
 	
-	@RequestMapping(value="/filter/type", method = RequestMethod.GET)
+	/*@RequestMapping(value="/filter/type", method = RequestMethod.GET)
 	public ResponseEntity<Object> TypeRestore(@RequestParam (name = "type")String type){
-		return new ResponseEntity<>(TypeFilter.type(DeletedFiles.downloadDeletedFiles(), type), HttpStatus.OK);
-	}
+		return new ResponseEntity<>(service.getTypeFile(type), HttpStatus.OK);
+	}*/
 	
 }

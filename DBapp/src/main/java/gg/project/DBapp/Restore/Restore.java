@@ -9,25 +9,20 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-
+import java.util.List;
 
 import gg.project.DBapp.Storage.DeletedFiles;
 import gg.project.DBapp.model.*;
 
 public class Restore {
 	
-	public static void restore(String name) {
+	public static boolean restore(List<RecordDeleted> FilteredList) {
 		
-		ArrayList<RecordDeleted> dfiles = DeletedFiles.downloadDeletedFiles();
-
 		String url = "https://api.dropboxapi.com/2/files/restore";
-		RecordDeleted RecordtoRestore = null;
-		for(RecordDeleted rd:dfiles) 
-			if(rd.getName().contains(name))
-				RecordtoRestore = rd;
-	
+		String data = ""; 
+		String line = "";
 		try {
-            
+            for(RecordDeleted rd:FilteredList) {
 			HttpURLConnection openConnection = (HttpURLConnection) new URL(url).openConnection();
 			openConnection.setRequestMethod("POST");
 			openConnection.setRequestProperty("Authorization",
@@ -36,10 +31,10 @@ public class Restore {
 			openConnection.setRequestProperty("Accept", "application/json");
 			openConnection.setDoOutput(true);
 			String jsonBody = "{\r\n" + 
-					"   \"path\": \"/"+RecordtoRestore.getPath_lower().substring(1)+"\",\r\n" +
-					"	\"rev\": \""+RecordtoRestore.getRev()+"\"\r\n" + 
+					"   \"path\": \"/"+rd.getPath_lower().substring(1)+"\",\r\n" +
+					"	\"rev\": \""+rd.getRev()+"\"\r\n" + 
 					"}";
-			
+            
 
 			try (OutputStream os = openConnection.getOutputStream()) {
 				byte[] input = jsonBody.getBytes("utf-8");
@@ -48,25 +43,24 @@ public class Restore {
 			
 			InputStream in = openConnection.getInputStream();
 
-			String data = ""; 
-			String line = "";
 			try {
 				InputStreamReader inR = new InputStreamReader(in);
 				BufferedReader buf = new BufferedReader(inR);
 
 				while ((line = buf.readLine()) != null) {
-					data += line; 							//tutti i dati presi dall'API in stringa
+					data += line;       //tutti i dati presi dall'API in stringa
 				}
 			} finally {
 				in.close();
 			}
-		
+        }
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		if(data.isEmpty()) return false;
+		else return true;
 		}
-
+	
 }
