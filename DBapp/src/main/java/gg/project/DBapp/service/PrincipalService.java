@@ -1,6 +1,5 @@
 package gg.project.DBapp.service;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 import gg.project.DBapp.Storage.*;
@@ -29,8 +28,14 @@ public class PrincipalService {
 		else return false;
 	}
 		
-	public List<RecordDeleted> getTypeFile(String type){
-		return TypeFilter.type(DeletedFiles.downloadDeletedFiles(), type);
+	public List<RecordDeleted> getTypeFileDeleted(String type){
+		return TypeFilter.typeDeleted(DeletedFiles.downloadDeletedFiles(), type);
 	}
+	
+	public List<RecordFile> getTypeFile(String type){
+		return TypeFilter.type(Storage.downloadFile(), type);
+	}
+	
+	
 }
  

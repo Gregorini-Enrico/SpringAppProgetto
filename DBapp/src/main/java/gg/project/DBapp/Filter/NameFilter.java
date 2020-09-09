@@ -3,7 +3,6 @@ package gg.project.DBapp.Filter;
 import java.util.ArrayList;
 import java.util.List;
 
-import gg.project.DBapp.Storage.DeletedFiles;
 import gg.project.DBapp.model.RecordDeleted;
 
 /**

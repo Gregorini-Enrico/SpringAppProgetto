@@ -5,10 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import gg.project.DBapp.Filter.TypeFilter;
 import gg.project.DBapp.Stats.Statistics;
 import gg.project.DBapp.Storage.*;
-import gg.project.DBapp.model.*;
 import gg.project.DBapp.service.PrincipalService;
 
 @RestController	
@@ -83,9 +81,13 @@ public class Controller {
 	    else return new ResponseEntity<>("L'operazione non è avvenuta con successo!", HttpStatus.BAD_REQUEST);
 	}
 	
-	/*@RequestMapping(value="/filter/type", method = RequestMethod.GET)
-	public ResponseEntity<Object> TypeRestore(@RequestParam (name = "type")String type){
-		return new ResponseEntity<>(service.getTypeFile(type), HttpStatus.OK);
-	}*/
+	@RequestMapping(value="/filter/type", method = RequestMethod.GET)
+	public ResponseEntity<Object> TypeRestore(@RequestParam (name = "type")String type, @RequestParam (name = "file")String file){
+		if(file.equals("file"))
+			return new ResponseEntity<>(service.getTypeFile(type), HttpStatus.OK);	
+		else if(file.equals("deleted"))
+			return new ResponseEntity<>(service.getTypeFileDeleted(type), HttpStatus.OK);
+	    else return new ResponseEntity<>("Param not valid", HttpStatus.OK);
+	}
 	
 }
