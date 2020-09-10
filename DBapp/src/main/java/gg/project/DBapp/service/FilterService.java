@@ -1,5 +1,7 @@
 package gg.project.DBapp.service;
 
+import static org.hamcrest.CoreMatchers.containsString;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
@@ -25,7 +27,7 @@ public class FilterService {
 	 */
 	 @SuppressWarnings("unchecked")
 	public static List<RecordDeleted> filtring(List<RecordDeleted> rd, String body){
-		 	HashMap<String,Object> filters = null; //Variabile in cui verranno inseriti i filtri del body della richiesta
+		 	HashMap<String,String> filters = null; //Variabile in cui verranno inseriti i filtri del body della richiesta
 		 	ObjectMapper obj = new ObjectMapper();
 		 	
 		 	try {
@@ -40,12 +42,28 @@ public class FilterService {
 		 	else if(filters.containsKey("path"))
 		 		return (List<RecordDeleted>) NameFilter.getFile(rd, (String) filters.get("path"));
 		    else {  //DA MODIFICARE 
-		    	if(filters.containsValue("after"))
-		    		return DateFilter.afterDate(rd, (Date)filters.get("date"));
-		    	else if(filters.containsValue("before"))
-		    		return DateFilter.beforeDate(rd, (Date)filters.get("date"));
+		    	Object stringaUtente = filters.get("date");
+		    	String []dataUtente = stringaUtente.toString().split("=");
+		    	//filters.replace("date", filters.get("date"), dataUtente[1].substring(0, dataUtente[1].length()-1));
+		    	filters.replace("date", dataUtente[1].substring(0, dataUtente[1].length()-1));
+		    	if(dataUtente[0].contains("after"))
+		    		return DateFilter.afterDate(rd, filters.get("date"));
+		    	else if(dataUtente[0].contains("before"))
+		    		return DateFilter.beforeDate(rd, filters.get("date"));
 		    	else 
-		    		return DateFilter.betweenDate(rd, (Date)filters.get("data inizio"), (Date)filters.get("data fine"));
+		    		return DateFilter.betweenDate(rd, filters.get("data inizio"), filters.get("data fine"));
+		    	
+		    	
+		      /*HashMap<String,Object> values =  filters.values();
+		    	if(values.containsKey("after"))
+		    		return DateFilter.afterDate(rd, (Date)values.get("after"));
+		    	else if(values.containsKey("before"))
+		    		return DateFilter.beforeDate(rd, (Date)values.get("before"));
+		    	else 
+		    		return DateFilter.betweenDate(rd, (Date)values.get("data inizio"), (Date)values.get("data fine"));
+		    	*/
+		    	
+		    	
 		    }
 	 }
 }
