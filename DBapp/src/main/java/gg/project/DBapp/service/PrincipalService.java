@@ -34,8 +34,6 @@ public class PrincipalService {
 	
 	public List<RecordFile> getTypeFile(String type){
 		return TypeFilter.type(Storage.downloadFile(), type);
-	}
-	
-	
+	}	
 }
  

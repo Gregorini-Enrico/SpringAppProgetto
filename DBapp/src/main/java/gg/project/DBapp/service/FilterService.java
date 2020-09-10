@@ -1,8 +1,6 @@
 package gg.project.DBapp.service;
 
-import static org.hamcrest.CoreMatchers.containsString;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -21,9 +19,6 @@ public class FilterService {
 	 * @param rd  lista dei file cancellati
 	 * @param body  RequestBody della richiesta per il restore
 	 * @return  lista di file filtrata
-	 * @throws ClassNotFoundException
-	 * @throws NoSuchMethodException
-	 * @throws InvocationTargetException
 	 */
 	 @SuppressWarnings("unchecked")
 	public static List<RecordDeleted> filtring(List<RecordDeleted> rd, String body){
@@ -51,19 +46,7 @@ public class FilterService {
 		    	else if(dataUtente[0].contains("before"))
 		    		return DateFilter.beforeDate(rd, filters.get("date"));
 		    	else 
-		    		return DateFilter.betweenDate(rd, filters.get("data inizio"), filters.get("data fine"));
-		    	
-		    	
-		      /*HashMap<String,Object> values =  filters.values();
-		    	if(values.containsKey("after"))
-		    		return DateFilter.afterDate(rd, (Date)values.get("after"));
-		    	else if(values.containsKey("before"))
-		    		return DateFilter.beforeDate(rd, (Date)values.get("before"));
-		    	else 
-		    		return DateFilter.betweenDate(rd, (Date)values.get("data inizio"), (Date)values.get("data fine"));
-		    	*/
-		    	
-		    	
+		    		return DateFilter.betweenDate(rd, filters.get("date"));  	    	
 		    }
 	 }
 }

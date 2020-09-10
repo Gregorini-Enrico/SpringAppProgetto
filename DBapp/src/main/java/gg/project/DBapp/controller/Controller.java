@@ -29,7 +29,6 @@ public class Controller {
 	@RequestMapping(value="/files/deleted", method = RequestMethod.GET) 
 	public ResponseEntity<Object> getDeletedFiles(){
 		return new ResponseEntity<>(service.getDeletedFiles(), HttpStatus.OK);
-		//return Storage.download();
 	}
 	
 	

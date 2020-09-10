@@ -23,12 +23,13 @@ public class Storage {
 
 	public static ArrayList<Record> download() {
 
-		String url = "https://api.dropboxapi.com/2/files/list_folder";
-		Parser p = null;
+		String url = "https://api.dropboxapi.com/2/files/list_folder";  //url per fare richiesta all'API dropbox
+		Parser p = null;   //Parser che servirà poi per ottenere la richiesta formato JSON dell'API dropbox 
 		try {
 
 			HttpURLConnection openConnection = (HttpURLConnection) new URL(url).openConnection();
-			openConnection.setRequestMethod("POST");
+			//setto tutti i paramentri e la body della richiesta 
+			openConnection.setRequestMethod("POST"); 
 			openConnection.setRequestProperty("Authorization",
 					"Bearer TTT_mp4F8uIAAAAAAAAAAfg7FoYwmgEPuELIrV7zBJvObmJE_0MO9HTvN1uB2SB7");
 			openConnection.setRequestProperty("Content-Type", "application/json");
@@ -43,7 +44,7 @@ public class Storage {
 					"}";
 			
 
-			try (OutputStream os = openConnection.getOutputStream()) {
+			try (OutputStream os = openConnection.getOutputStream()) {  //faccio richiesta all'API dropbox
 				byte[] input = jsonBody.getBytes("utf-8");
 				os.write(input, 0, input.length);
 			}

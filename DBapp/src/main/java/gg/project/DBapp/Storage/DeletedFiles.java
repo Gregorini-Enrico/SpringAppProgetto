@@ -8,7 +8,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -17,10 +16,13 @@ import gg.project.DBapp.model.Record;
 
 public class DeletedFiles {
 	
+	/**
+	 * Metodo che restituisce tutti i file eliminati con tutti i vari attributi dati dalla chiamata list_revisions
+	 * 
+	 * @return ArrayList<RecordDeleted> lista di tutti i file eliminati
+	 */
 	public static ArrayList<RecordDeleted> downloadDeletedFiles() {
 		
-		int i = 0;
-		//DeletedParser[] dp = new DeletedParser[100];
 		ArrayList<DeletedParser> dp = new ArrayList<DeletedParser>();
 		ArrayList<Record> records = Storage.download();
 		ArrayList<RecordDeleted> dfiles = new ArrayList<RecordDeleted>();
@@ -38,7 +40,8 @@ public class DeletedFiles {
 		String url = "https://api.dropboxapi.com/2/files/list_revisions";
 		for(RecordDeleted rd:dfiles) {
 		try {
-			if(rd.getPath_lower().contains(".")) {
+			
+			if(rd.getPath_lower().contains(".")) {  //serve per distinguere i file(che hanno sempre un formato quindi con il .) dalle cartelle che non hanno il punto
 			HttpURLConnection openConnection = (HttpURLConnection) new URL(url).openConnection();
 			openConnection.setRequestMethod("POST");
 			openConnection.setRequestProperty("Authorization",
@@ -73,10 +76,8 @@ public class DeletedFiles {
 			}
             
 			ObjectMapper obj = new ObjectMapper();
-			//dp[i] = obj.readValue(data, DeletedParser.class);
 			dp.add(obj.readValue(data, DeletedParser.class));
-			i++;
-            } 
+			} 
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
