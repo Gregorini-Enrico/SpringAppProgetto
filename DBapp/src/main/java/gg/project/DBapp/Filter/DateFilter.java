@@ -41,14 +41,15 @@ public class DateFilter {
 	@SuppressWarnings("deprecation")
 	public static HashMap<RecordFile,Date> StringToDateFile(List<RecordFile> records){  //client_modified = "2020-08-24T07:42:07Z"
 		HashMap<RecordFile,Date> files = new HashMap<RecordFile,Date>();
-		Date data = new Date(); 
+		Date data = null; 
 		for(RecordFile rd:records) { 
 			 int anno = Integer.parseInt(rd.getClient_modified().substring(0, 4));      //prendo le prime 4 lettere del campo client_modified che corrispondo all'anno e le converto in intero
 			 int mese = Integer.parseInt(rd.getClient_modified().substring(6, 7));      //prendo le lettere del campo client_modified che corrispondo al mese e le converto in intero
 			 int giorno = Integer.parseInt(rd.getClient_modified().substring(8, 10));   //prendo le lettere del campo client_modified che corrispondo al giorno e le converto in intero
 			 int ora = Integer.parseInt(rd.getClient_modified().substring(12, 13));     //prendo le lettere del campo client_modified che corrispondo all'ora e le converto in intero
 			 int minuto = Integer.parseInt(rd.getClient_modified().substring(14, 16));  //prendo le lettere del campo client_modified che corrispondo al minuto e le converto in intero
- 			 data.setYear(anno-1900);           //setto l'anno della data con anno sottraendo 1900 perchè nella classe Date viene sempre sommato 1900
+ 			 data = new Date();
+			 data.setYear(anno-1900);           //setto l'anno della data con anno sottraendo 1900 perchè nella classe Date viene sempre sommato 1900
  			 data.setMonth(mese-1);             //setto il mese della data con mese sottraendo 1 perchè nella classe Date viene sempre sommato 1
  			 data.setDate(giorno);              //setto il giorno della data con giorno
  			 data.setHours(ora);                //setto l'ora della data con ora

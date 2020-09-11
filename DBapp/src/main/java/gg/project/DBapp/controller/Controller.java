@@ -100,11 +100,5 @@ public class Controller {
 			return new ResponseEntity<>(service.getFilteredFileDeleted(filter), HttpStatus.OK);
 	    else return new ResponseEntity<>("Param not valid", HttpStatus.OK);
 	}
-	
-	
-	
-	
-	
-	
-	
+		
 }

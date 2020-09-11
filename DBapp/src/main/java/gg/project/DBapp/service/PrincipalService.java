@@ -26,14 +26,6 @@ public class PrincipalService {
 		if(Restore.restore(FilterService.filtring(DeletedFiles.downloadDeletedFiles(), body))) return true;
 		else return false;
 	}
-		
-	/*public List<RecordDeleted> getTypeFileDeleted(String type){
-		return TypeFilter.typeDeleted(DeletedFiles.downloadDeletedFiles(), type);
-	}
-	
-	public List<RecordFile> getTypeFile(String type){
-		return TypeFilter.type(Storage.downloadFile(), type);
-	}	*/
 	
 	public List<RecordDeleted> getFilteredFileDeleted(String filter){
 		return FilterService.filtring(DeletedFiles.downloadDeletedFiles(), filter);

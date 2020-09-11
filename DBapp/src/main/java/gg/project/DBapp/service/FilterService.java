@@ -6,6 +6,7 @@ import java.util.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import gg.project.DBapp.Exception.DateFilterFormatIncorrectException;
 import gg.project.DBapp.Filter.DateFilter;
 import gg.project.DBapp.Filter.NameFilter;
 import gg.project.DBapp.Filter.TypeFilter;
@@ -75,7 +76,7 @@ public class FilterService {
 		 		return TypeFilter.type(rd, (String) filters.get("type"));
 		 	else if(filters.containsKey("path"))
 		 		return (List<RecordFile>) NameFilter.getFile(rd, (String) filters.get("path"));
-		    else {  //DA MODIFICARE 
+		    else if(filters.containsKey("date")){  //DA MODIFICARE 
 		    	Object stringaUtente = filters.get("date");
 		    	String []dataUtente = stringaUtente.toString().split("=");
 		    	//filters.replace("date", filters.get("date"), dataUtente[1].substring(0, dataUtente[1].length()-1));
@@ -84,9 +85,11 @@ public class FilterService {
 		    		return DateFilter.afterDateFile(rd, filters.get("date"));
 		    	else if(dataUtente[0].contains("before"))
 		    		return DateFilter.beforeDateFile(rd, filters.get("date"));
-		    	else 
-		    		return DateFilter.betweenDateFile(rd, filters.get("date"));  	    	
+		    	else if(dataUtente[0].contains("between"))
+		    		return DateFilter.betweenDateFile(rd, filters.get("date"));  	
+		    	else throw new DateFilterFormatIncorrectException();
 		    }
+		    else throw new DateFilterFormatIncorrectException();
 	 }
 	 
 	 
