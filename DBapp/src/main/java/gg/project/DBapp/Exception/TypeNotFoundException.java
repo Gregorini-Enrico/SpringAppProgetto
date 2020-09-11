@@ -10,6 +10,6 @@ public class TypeNotFoundException extends RuntimeException{
 	private static final long serialVersionUID = 1L;
 
 	public String getMessage() {
-		return "Non esistono file di questo tipo nella cartella dropbox!";
+		return "Non esistono file di questo tipo nella cartella principale dropbox!";
 	}
 }

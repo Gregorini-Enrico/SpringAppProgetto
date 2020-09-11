@@ -5,7 +5,6 @@ import java.util.*;
 import gg.project.DBapp.Storage.*;
 import gg.project.DBapp.model.Metadata;
 import gg.project.DBapp.model.*;
-import gg.project.DBapp.Filter.TypeFilter;
 import gg.project.DBapp.Restore.*;
 
 @org.springframework.stereotype.Service
@@ -28,12 +27,22 @@ public class PrincipalService {
 		else return false;
 	}
 		
-	public List<RecordDeleted> getTypeFileDeleted(String type){
+	/*public List<RecordDeleted> getTypeFileDeleted(String type){
 		return TypeFilter.typeDeleted(DeletedFiles.downloadDeletedFiles(), type);
 	}
 	
 	public List<RecordFile> getTypeFile(String type){
 		return TypeFilter.type(Storage.downloadFile(), type);
-	}	
+	}	*/
+	
+	public List<RecordDeleted> getFilteredFileDeleted(String filter){
+		return FilterService.filtring(DeletedFiles.downloadDeletedFiles(), filter);
+	}
+	
+	public List<RecordFile> getFilteredFile(String filter){
+		return FilterService.filtringFile(Storage.downloadFile(), filter);
+	}
+	
+	
 }
  
