@@ -20,7 +20,7 @@ public class NameFilter {
 	public static List<RecordDeleted> getFileDeleted(List<RecordDeleted> records, String path) {
 		ArrayList<RecordDeleted> RecordtoRestore = new ArrayList<RecordDeleted>();
 		for(RecordDeleted rd:records) 
-			if(rd.getName().contains(path))
+			if(rd.getPath_lower().equals(path))
 				RecordtoRestore.add(rd);
 		if(RecordtoRestore.isEmpty())
 			throw new PathNotFoundException();
@@ -36,7 +36,7 @@ public class NameFilter {
 	public static List<RecordFile> getFile(List<RecordFile> records, String path) {
 		ArrayList<RecordFile> RecordtoRestore = new ArrayList<RecordFile>();
 		for(RecordFile rd:records) 
-			if(rd.getName().contains(path))
+			if(rd.getPath_lower().equals(path))
 				RecordtoRestore.add(rd);
 		if(RecordtoRestore.isEmpty())
 			throw new PathNotFoundException();

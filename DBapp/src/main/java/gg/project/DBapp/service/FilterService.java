@@ -34,10 +34,10 @@ public class FilterService {
 			}
 		 	
 		 	if(filters.containsKey("type")) 
-		 		return TypeFilter.typeDeleted(rd, (String) filters.get("type"));
+		 		return TypeFilter.typeDeleted(rd, filters.get("type"));
 		 	else if(filters.containsKey("path"))
-		 		return (List<RecordDeleted>) NameFilter.getFileDeleted(rd, (String) filters.get("path"));
-		    else {  //DA MODIFICARE 
+		 		return NameFilter.getFileDeleted(rd, filters.get("path"));
+		    else if(filters.containsKey("date")){  
 		    	Object stringaUtente = filters.get("date");
 		    	String []dataUtente = stringaUtente.toString().split("=");
 		    	//filters.replace("date", filters.get("date"), dataUtente[1].substring(0, dataUtente[1].length()-1));
@@ -46,9 +46,11 @@ public class FilterService {
 		    		return DateFilter.afterDate(rd, filters.get("date"));
 		    	else if(dataUtente[0].contains("before"))
 		    		return DateFilter.beforeDate(rd, filters.get("date"));
-		    	else 
-		    		return DateFilter.betweenDate(rd, filters.get("date"));  	    	
+		    	else if(dataUtente[0].contains("between"))
+		    		return DateFilter.betweenDate(rd, filters.get("date"));  	    
+		    	else throw new DateFilterFormatIncorrectException();
 		    }
+		    else throw new DateFilterFormatIncorrectException();
 	 }
 	 
 	
@@ -75,8 +77,8 @@ public class FilterService {
 		 	if(filters.containsKey("type")) 
 		 		return TypeFilter.type(rd, (String) filters.get("type"));
 		 	else if(filters.containsKey("path"))
-		 		return (List<RecordFile>) NameFilter.getFile(rd, (String) filters.get("path"));
-		    else if(filters.containsKey("date")){  //DA MODIFICARE 
+		 		return NameFilter.getFile(rd, (String) filters.get("path"));
+		    else if(filters.containsKey("date")){   
 		    	Object stringaUtente = filters.get("date");
 		    	String []dataUtente = stringaUtente.toString().split("=");
 		    	//filters.replace("date", filters.get("date"), dataUtente[1].substring(0, dataUtente[1].length()-1));

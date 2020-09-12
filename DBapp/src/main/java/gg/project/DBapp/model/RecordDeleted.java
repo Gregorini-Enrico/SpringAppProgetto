@@ -9,9 +9,13 @@ public class RecordDeleted extends Record{
 	
 	public RecordDeleted() {}
 
-	public RecordDeleted(String name, String tag, String path_lower) {
-		super(name, tag, path_lower);
+	public RecordDeleted(String name, String tag, String path_lower, String id, String client_modified, String rev, double size) {
+		super(name, tag, path_lower);		this.id = id;
+		this.client_modified = client_modified;
+		this.rev = rev;
+		this.size = size;
 	}
+	
 
 	public String getId() {
 		return id;

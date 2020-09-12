@@ -59,6 +59,9 @@ public class DateFilter {
 		return files;   //ritorno l'HashMap dei file presenti con le loro relative date di modifica in versione Date 
 	}
 	
+	
+	
+	
 	/**
 	 * Metodo per filtrare tutti i file modificati prima della data passata dall'utente
 	 * @param files HashMap di RecordDeleted con associato la data ad esso corrispondente
@@ -113,6 +116,7 @@ public class DateFilter {
 	
 	
 	
+	
 	/**
 	 * Metodo per filtrare tutti i file modificati dopo della data passata dall'utente
 	 * @param files HashMap di RecordDeleted con associato la data ad esso corrispondente
@@ -128,12 +132,12 @@ public class DateFilter {
 		date.setDate(Integer.parseInt(dmy[0]));
 		date.setMonth(Integer.parseInt(dmy[1])-1);
 		date.setYear(Integer.parseInt(dmy[2])-1900);
-		
 		ArrayList<RecordDeleted> filtered = new ArrayList<RecordDeleted>();   //inizializzo la lista filtrata
 		
-		for(RecordDeleted rd: files)
+		for(RecordDeleted rd: files) {
 			if(records.get(rd).after(date))    //controllo se la data del file è conseguente alla data inserita dall'utente
-				filtered.add(rd);              //se si, inserisco il file nella lista filtrata
+				filtered.add(rd);    //se si, inserisco il file nella lista filtrata
+		}
 		if(filtered.isEmpty())
 			throw new FileInDateNotFoundException();    //se la lista filtrata è vuota,lancio un'eccezione
 		return filtered;

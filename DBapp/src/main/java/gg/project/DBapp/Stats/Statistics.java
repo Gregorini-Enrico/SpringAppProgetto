@@ -4,6 +4,7 @@ package gg.project.DBapp.Stats;
 import java.util.*;
 import java.util.regex.Pattern;
 
+import gg.project.DBapp.Exception.SubfolderNotFoundException;
 import gg.project.DBapp.model.*;
 
 public class Statistics {
@@ -14,8 +15,11 @@ public class Statistics {
 	 * @param records lista dei Record da analizzare
 	 * @param subfolder sottocartella scelta dall'utente
 	 * return float media della dimensione dei file
-	 */
-	public static double media(List<RecordFile> records, String subfolder) {
+	 * @throws SubfolderNotFoundException 
+	 * @author Enrico gregorini
+	 * @author Daniele Gjeka
+	 * */
+	public static double media(List<RecordFile> records, String subfolder) throws SubfolderNotFoundException {
 		double s = 0;
 		for(RecordFile f:records) {
 			if(!subfolder.isEmpty()) { //controllo se la sottocartella è vuota o no
@@ -31,6 +35,7 @@ public class Statistics {
 			        }  
 			}
 		}
+		if(s==0)  throw new SubfolderNotFoundException();
 		return s/records.size(); //ritorna la media 
 	}
 	
@@ -40,8 +45,11 @@ public class Statistics {
 	 * @param records lista dei Record da analizzare
 	 * @param subfolder sottocartella scelta dall'utente
 	 * return float media della dimensione dei file
+	 * @throws SubfolderNotFoundException 
+	 * @author Enrico gregorini
+	 * @author Daniele Gjeka
 	 */
-	public static double mediaDeletedFile(List<RecordDeleted> Drecords, String subfolder) {
+	public static double mediaDeletedFile(List<RecordDeleted> Drecords, String subfolder) throws SubfolderNotFoundException {
 		double s = 0;
 		for(RecordDeleted f:Drecords){
 			if(!subfolder.isEmpty()) {  //controllo se la sottocartella è vuota o no
@@ -57,56 +65,107 @@ public class Statistics {
 			        }  
 			}
 		}
+		if(s==0)  throw new SubfolderNotFoundException();
 		return s/Drecords.size(); //ritorna la media in KB
 	}
 	
-	public static RecordFile maxDimFile(List<RecordFile> records, String subfolder) {
+	
+	
+	
+	/**
+	 * Metodo che restituisce il file con la dimensione più grande
+	 * @param records lista di file presenti
+	 * @param subfolder sottocartella scelta dall'utente 
+	 * @return max file più grande
+	 * @throws SubfolderNotFoundException
+	 * @author Enrico gregorini
+	 * @author Daniele Gjeka
+	 */
+	public static RecordFile maxDimFile(List<RecordFile> records, String subfolder) throws SubfolderNotFoundException {
 		RecordFile max = new RecordFile();
 		for(RecordFile r:records){ 
 			if(!subfolder.isEmpty()) {   //controllo se la sottocartella è vuota o no
 			    if(r.getPath_lower().contains(subfolder))   //se non è vuota controllo se il file sia dentro la cartella
 				     if(r.getSize()>max.getSize())    max = r; //calcolo la dimensione in B
-				}
-				else { if(r.getSize()>max.getSize())    max = r;}
 			}
+			else { if(r.getSize()>max.getSize())    max = r;}
+		}
+		if(max.getName().equals(null)) throw new SubfolderNotFoundException();
 		return max; //ritorno il file con dimensione massima
 	}
 	
-	public static RecordDeleted maxDimFileDeleted(List<RecordDeleted> Drecords, String subfolder) {
+	/**
+	 * Metodo che restituisce il file eliminato con la dimensione più grande
+	 * @param Drecords lista di file eliminati
+	 * @param subfolder sottocartella scelta dall'utente 
+	 * @return max file eliminato più grande
+	 * @throws SubfolderNotFoundException
+	 * @author Enrico gregorini
+	 * @author Daniele Gjeka
+	 */
+	public static RecordDeleted maxDimFileDeleted(List<RecordDeleted> Drecords, String subfolder) throws SubfolderNotFoundException {
 		RecordDeleted max = new RecordDeleted();
 		for(RecordDeleted r:Drecords){ 
 			if(!subfolder.isEmpty()) {   //controllo se la sottocartella è vuota o no
 			    if(r.getPath_lower().contains(subfolder))  //se non è vuota controllo se il file sia dentro la cartella
 				     if(r.getSize()>max.getSize())    max = r; //calcolo la dimensione in B
-				}
-				else { if(r.getSize()>max.getSize())    max = r;}
 			}
+			else { if(r.getSize()>max.getSize())    max = r;}
+		}
+		if(max.getName().equals(null)) throw new SubfolderNotFoundException();
 		return max; //ritorno il file con dimensione massima in KB
 	}
 	
-	public static RecordFile minDimFile(List<RecordFile> records, String subfolder) {
-		RecordFile max = records.get(0);
+	/**
+	 * Metodo che restituisce il file con la dimensione più piccola
+	 * @param Drecords lista di file presenti
+	 * @param subfolder sottocartella scelta dall'utente 
+	 * @return min file più grande
+	 * @throws SubfolderNotFoundException
+	 * @author Enrico gregorini
+	 * @author Daniele Gjeka
+	 */
+	public static RecordFile minDimFile(List<RecordFile> records, String subfolder) throws SubfolderNotFoundException {
+		RecordFile min = new RecordFile();
+		min.setSize(100000000);
 		for(RecordFile r:records){ 
 			if(!subfolder.isEmpty()) {    //controllo se la sottocartella è vuota o no
 			    if(r.getPath_lower().contains(subfolder))   //se non è vuota controllo se il file sia dentro la cartella
-				     if(r.getSize()<max.getSize())    max = r; //calcolo la dimensione in B
+				     if(r.getSize()<min.getSize())    min = r; //calcolo la dimensione in B
 			}
-		    else { if(r.getSize()<max.getSize())    max = r;}    //se subfolder è vuota, prendo tutti i file della lista
+		    else { if(r.getSize()<min.getSize())    min = r;}    //se subfolder è vuota, prendo tutti i file della lista
 		}
-		return max; //ritorno il file con dimensione massima
+		if(min.getName().equals(null)) throw new SubfolderNotFoundException();
+		return min; //ritorno il file con dimensione massima
 	}
 	
-	public static RecordDeleted minDimFileDeleted(List<RecordDeleted> Drecords, String subfolder) {
-		RecordDeleted max = Drecords.get(0);
+	/**
+	 * Metodo che restituisce il file eliminato con la dimensione più piccola
+	 * @param Drecords lista di file eliminati
+	 * @param subfolder sottocartella scelta dall'utente 
+	 * @return min file eliminato più piccola
+	 * @throws SubfolderNotFoundException
+	 * @author Enrico gregorini
+	 * @author Daniele Gjeka
+	 */
+	public static RecordDeleted minDimFileDeleted(List<RecordDeleted> Drecords, String subfolder) throws SubfolderNotFoundException {
+		RecordDeleted min = new RecordDeleted();
+		min.setSize(100000000);
 		for(RecordDeleted r:Drecords) { 
 			if(!subfolder.isEmpty()) {    //controllo se la sottocartella è vuota o no
 		        if(r.getPath_lower().contains(subfolder))   //se non è vuota controllo se il file sia dentro la cartella
-			        if(r.getSize()<max.getSize())    max = r; //calcolo la dimensione in B
+			        if(r.getSize()<min.getSize())    min = r; //calcolo la dimensione in B
 		    }
-			else { if(r.getSize()<max.getSize())    max = r;}      //se subfolder è vuota, prendo tutti i file della lista
+			else { if(r.getSize()<min.getSize())    min = r;}      //se subfolder è vuota, prendo tutti i file della lista
 		}
-		return max; //ritorno il file con dimensione massima in B
+		if(min.getName().equals(null)) throw new SubfolderNotFoundException();
+		return min; //ritorno il file con dimensione massima in B
 	}
+	
+	
+	
+	
+	
 	
 	
 	/**
