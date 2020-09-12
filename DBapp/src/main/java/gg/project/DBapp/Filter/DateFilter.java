@@ -48,7 +48,7 @@ public class DateFilter {
 			 int giorno = Integer.parseInt(rd.getClient_modified().substring(8, 10));   //prendo le lettere del campo client_modified che corrispondo al giorno e le converto in intero
 			 int ora = Integer.parseInt(rd.getClient_modified().substring(12, 13));     //prendo le lettere del campo client_modified che corrispondo all'ora e le converto in intero
 			 int minuto = Integer.parseInt(rd.getClient_modified().substring(14, 16));  //prendo le lettere del campo client_modified che corrispondo al minuto e le converto in intero
- 			 data = new Date();
+			 data = new Date();
 			 data.setYear(anno-1900);           //setto l'anno della data con anno sottraendo 1900 perchè nella classe Date viene sempre sommato 1900
  			 data.setMonth(mese-1);             //setto il mese della data con mese sottraendo 1 perchè nella classe Date viene sempre sommato 1
  			 data.setDate(giorno);              //setto il giorno della data con giorno
@@ -73,10 +73,14 @@ public class DateFilter {
 		HashMap<RecordDeleted,Date> records = DateFilter.StringToDateDeleted(files);
 		
 		Date date = new Date();
-		String[] dmy = data.split("/");
-		date.setDate(Integer.parseInt(dmy[0]));
-		date.setMonth(Integer.parseInt(dmy[1])-1);
-		date.setYear(Integer.parseInt(dmy[2])-1900);
+		String[] dmy = data.split("/");  //dmy ha 3 elementi: dmy[0] = giorno, dmy[1] = mese, dmy[2] = anno
+		int giorno = Integer.parseInt(dmy[0]);
+		int mese = Integer.parseInt(dmy[1]);
+		int anno = Integer.parseInt(dmy[2]);
+		if(giorno<0 || giorno >31 || mese <0 || mese >12 || anno<1900 || anno>2100) throw new DateIncorrectException();   //controllo se la data è inserita correttamente
+		date.setDate(giorno);
+		date.setMonth(mese-1);
+		date.setYear(anno-1900);
 		
 		ArrayList<RecordDeleted> filtered = new ArrayList<RecordDeleted>();  //inizializzo la lista filtrata
 		
@@ -99,10 +103,14 @@ public class DateFilter {
 		HashMap<RecordFile,Date> records = DateFilter.StringToDateFile(files);
 		
 		Date date = new Date();
-		String[] dmy = data.split("/");
-		date.setDate(Integer.parseInt(dmy[0]));
-		date.setMonth(Integer.parseInt(dmy[1])-1);
-		date.setYear(Integer.parseInt(dmy[2])-1900);
+		String[] dmy = data.split("/");   //dmy ha 3 elementi: dmy[0] = giorno, dmy[1] = mese, dmy[2] = anno
+		int giorno = Integer.parseInt(dmy[0]);
+		int mese = Integer.parseInt(dmy[1]);
+		int anno = Integer.parseInt(dmy[2]);
+		if(giorno<0 || giorno >31 || mese <0 || mese >12 || anno<1900 || anno>2100) throw new DateIncorrectException();   //controllo se la data è inserita correttamente
+		date.setDate(giorno);
+		date.setMonth(mese-1);
+		date.setYear(anno-1900);
 		
 		ArrayList<RecordFile> filtered = new ArrayList<RecordFile>();   //inizializzo la lista filtrata
 		
@@ -127,11 +135,16 @@ public class DateFilter {
 	public static List<RecordDeleted> afterDate(List<RecordDeleted> files, String data){
 		HashMap<RecordDeleted,Date> records = DateFilter.StringToDateDeleted(files);
 		
-		Date date = new Date();
-		String[] dmy = data.split("/");
-		date.setDate(Integer.parseInt(dmy[0]));
-		date.setMonth(Integer.parseInt(dmy[1])-1);
-		date.setYear(Integer.parseInt(dmy[2])-1900);
+		Date date = new Date(); 
+		String[] dmy = data.split("/");   //dmy ha 3 elementi: dmy[0] = giorno, dmy[1] = mese, dmy[2] = anno
+		int giorno = Integer.parseInt(dmy[0]);
+		int mese = Integer.parseInt(dmy[1]);
+		int anno = Integer.parseInt(dmy[2]);
+		if(giorno<0 || giorno >31 || mese <0 || mese >12 || anno<1900 || anno>2100) throw new DateIncorrectException();   //controllo se la data è inserita correttamente
+		date.setDate(giorno);
+		date.setMonth(mese-1);
+		date.setYear(anno-1900);
+		
 		ArrayList<RecordDeleted> filtered = new ArrayList<RecordDeleted>();   //inizializzo la lista filtrata
 		
 		for(RecordDeleted rd: files) {
@@ -153,10 +166,14 @@ public class DateFilter {
 	public static List<RecordFile> afterDateFile(List<RecordFile> files, String data){
 		HashMap<RecordFile,Date> records = DateFilter.StringToDateFile(files);
 		Date date = new Date();
-		String[] dmy = data.split("/");
-		date.setDate(Integer.parseInt(dmy[0]));
-		date.setMonth(Integer.parseInt(dmy[1])-1);
-		date.setYear(Integer.parseInt(dmy[2])-1900);
+		String[] dmy = data.split("/");   //dmy ha 3 elementi: dmy[0] = giorno, dmy[1] = mese, dmy[2] = anno
+		int giorno = Integer.parseInt(dmy[0]);
+		int mese = Integer.parseInt(dmy[1]);
+		int anno = Integer.parseInt(dmy[2]);
+		if(giorno<0 || giorno >31 || mese <0 || mese >12 || anno<1900 || anno>2100) throw new DateIncorrectException();  //controllo se la data è inserita correttamente
+		date.setDate(giorno);
+		date.setMonth(mese-1);
+		date.setYear(anno-1900);
 		
 		ArrayList<RecordFile> filtered = new ArrayList<RecordFile>();   //inizializzo la lista filtrata
 		
@@ -180,17 +197,26 @@ public class DateFilter {
 		HashMap<RecordDeleted,Date> records = DateFilter.StringToDateDeleted(files);    //converto tutte le stringhe del campo client_modified in una classe Date asscociandolo all'oggetto RecordDeleted corrispondente
 		Date Datainizio = new Date(), Datafine = new Date();
 		
-		String[] SDate = date.split(","); //array di stringhe per splittare le due date
+		String[] SDate = date.split(","); //array di stringhe per splittare le due date 
 		String inizio = SDate[0].substring(1), fine = SDate[1].substring(1, SDate[1].length()-1); //variabili che splittano le due date passate dall'utente
 		
+		//dmy ha 3 elementi: dmy[0] = giorno, dmy[1] = mese, dmy[2] = anno
 		String[] dmy1 = inizio.split("/");  //splitto inizio per ottenere i valori per settare Datainizio (oggetto Date)
-		Datainizio.setDate(Integer.parseInt(dmy1[0]));
-		Datainizio.setMonth(Integer.parseInt(dmy1[1])-1);  //-1 perchè il mese viene sempre aumentato di 1
-		Datainizio.setYear(Integer.parseInt(dmy1[2])-1900);   //-1900 perchè l'anno viene sempre aumentato di 1900 nella classe Date
-		String[] dmy2 = fine.split("/");    //splitto fine per ottenere i valori per settare Datafine (oggetto Date)   
-		Datafine.setDate(Integer.parseInt(dmy2[0]));
-		Datafine.setMonth(Integer.parseInt(dmy2[1])-1);    //-1 perchè il mese viene sempre aumentato di 1
-		Datafine.setYear(Integer.parseInt(dmy2[2])-1900);   //-1900 perchè l'anno viene sempre aumentato di 1900 nella classe Date
+		int giornoin = Integer.parseInt(dmy1[0]);
+		int mesein = Integer.parseInt(dmy1[1]);
+		int annoin = Integer.parseInt(dmy1[2]);
+		if(giornoin<0 || giornoin>31 || mesein<0 || mesein>12 || annoin<1900 || annoin>2100) throw new DateIncorrectException();//controllo se la data è inserita correttamente
+		Datainizio.setDate(giornoin);
+		Datainizio.setMonth(mesein-1);  //-1 perchè il mese viene sempre aumentato di 1
+		Datainizio.setYear(annoin-1900);   //-1900 perchè l'anno viene sempre aumentato di 1900 nella classe Date
+		String[] dmy2 = fine.split("/");    //splitto fine per ottenere i valori per settare Datafine (oggetto Date)  
+		int giornofi = Integer.parseInt(dmy2[0]);
+		int mesefi = Integer.parseInt(dmy2[1]);
+		int annofi = Integer.parseInt(dmy2[2]);
+		if(giornofi<0 || giornofi>31 || mesefi<0 || mesefi>12 || annofi<1900 || annofi>2100) throw new DateIncorrectException();   //controllo se la data è inserita correttamente
+		Datafine.setDate(giornofi);
+		Datafine.setMonth(mesefi-1);    //-1 perchè il mese viene sempre aumentato di 1
+		Datafine.setYear(annofi-1900);   //-1900 perchè l'anno viene sempre aumentato di 1900 nella classe Date
 		
 		if(Datafine.before(Datainizio)) throw new DateFilterIncorrectException();    //se Datafine è precedente a Datainizio lancio un'eccezione
 		
@@ -218,14 +244,23 @@ public class DateFilter {
 		String[] SDate = date.split(","); //array di stringhe per splittare le due date
 		String inizio = SDate[0].substring(1), fine = SDate[1].substring(1, SDate[1].length()-1); //variabili che splittano le due date passate dall'utente
 		
+		//dmy ha 3 elementi: dmy[0] = giorno, dmy[1] = mese, dmy[2] = anno
 		String[] dmy1 = inizio.split("/");  //splitto inizio per ottenere i valori per settare Datainizio (oggetto Date)
-		Datainizio.setDate(Integer.parseInt(dmy1[0]));
-		Datainizio.setMonth(Integer.parseInt(dmy1[1])-1);  //-1 perchè il mese viene sempre aumentato di 1
-		Datainizio.setYear(Integer.parseInt(dmy1[2])-1900);   //-1900 perchè l'anno viene sempre aumentato di 1900 nella classe Date
-		String[] dmy2 = fine.split("/");    //splitto fine per ottenere i valori per settare Datafine (oggetto Date)   
-		Datafine.setDate(Integer.parseInt(dmy2[0]));
-		Datafine.setMonth(Integer.parseInt(dmy2[1])-1);    //-1 perchè il mese viene sempre aumentato di 1
-		Datafine.setYear(Integer.parseInt(dmy2[2])-1900);   //-1900 perchè l'anno viene sempre aumentato di 1900 nella classe Date
+		int giornoin = Integer.parseInt(dmy1[0]);
+		int mesein = Integer.parseInt(dmy1[1]);
+		int annoin = Integer.parseInt(dmy1[2]);
+		if(giornoin<0 || giornoin>31 || mesein<0 || mesein>12 || annoin<1900 || annoin>2100) throw new DateIncorrectException();//controllo se la data è inserita correttamente
+		Datainizio.setDate(giornoin);
+		Datainizio.setMonth(mesein-1);  //-1 perchè il mese viene sempre aumentato di 1
+		Datainizio.setYear(annoin-1900);   //-1900 perchè l'anno viene sempre aumentato di 1900 nella classe Date
+		String[] dmy2 = fine.split("/");    //splitto fine per ottenere i valori per settare Datafine (oggetto Date)  
+		int giornofi = Integer.parseInt(dmy2[0]);
+		int mesefi = Integer.parseInt(dmy2[1]);
+		int annofi = Integer.parseInt(dmy2[2]);
+		if(giornofi<0 || giornofi>31 || mesefi<0 || mesefi>12 || annofi<1900 || annofi>2100) throw new DateIncorrectException();   //controllo se la data è inserita correttamente
+		Datafine.setDate(giornofi);
+		Datafine.setMonth(mesefi-1);    //-1 perchè il mese viene sempre aumentato di 1
+		Datafine.setYear(annofi-1900);   //-1900 perchè l'anno viene sempre aumentato di 1900 nella classe Date
 		
 		if(Datafine.before(Datainizio)) throw new DateFilterIncorrectException();    //se Datafine è precedente a Datainizio lancio un'eccezione
 		

@@ -24,20 +24,22 @@ public class Statistics {
 		for(RecordFile f:records) {
 			if(!subfolder.isEmpty()) { //controllo se la sottocartella è vuota o no
 				if(f.getPath_lower().contains(subfolder)) {  //se non è vuota controllo se il file sia dentro la cartella
-			         double KB = f.getSize()/1024; //calcolo la dimensione in KB
+			         double KB = f.getSize()/(1024*1024); //calcolo la dimensione in MB
 			         s += KB;
 				}
 			}
 			else{   //se subfolder è vuota, prendo tutti i file della lista
 				    if(f.getPath_lower().contains(subfolder)) {
-		               double KB = f.getSize()/1024; //calcolo la dimensione in KB
+		               double KB = f.getSize()/(1024*1024); //calcolo la dimensione in MB
 		               s += KB;
 			        }  
 			}
 		}
 		if(s==0)  throw new SubfolderNotFoundException();
-		return s/records.size(); //ritorna la media 
-	}
+		double media = s/records.size(); //calcolo la media in MB
+		media = Math.round(media*100);   media /= 100;  //arrotondo la media a 2 cifre decimali
+		return media; //ritorno la media
+		}
 	
 	/**
 	 * Metodo per calcolare la media delle dimensioni dei file presenti nella cartella inserita dall'utente
@@ -54,19 +56,21 @@ public class Statistics {
 		for(RecordDeleted f:Drecords){
 			if(!subfolder.isEmpty()) {  //controllo se la sottocartella è vuota o no
 				if(f.getPath_lower().contains(subfolder)) {    //se non è vuota controllo se il file sia dentro la cartella
-			         double KB = f.getSize()/1024; //calcolo la dimensione in KB
+			         double KB = f.getSize()/(1024*1024); //calcolo la dimensione in MB
 			         s += KB;
 				}
 			}
 			else{    //se subfolder è vuota, prendo tutti i file della lista
 				    if(f.getPath_lower().contains(subfolder)) {
-		               double KB = f.getSize()/1024; //calcolo la dimensione in KB
+		               double KB = f.getSize()/(1024*1024); //calcolo la dimensione in MB
 		               s += KB;
 			        }  
 			}
 		}
 		if(s==0)  throw new SubfolderNotFoundException();
-		return s/Drecords.size(); //ritorna la media in KB
+		double media = s/Drecords.size(); //calcolo la media in MB
+		media = Math.round(media*100);   media /= 100;  //arrotondo la media a 2 cifre decimali
+		return media; //ritorno la media
 	}
 	
 	
@@ -174,8 +178,9 @@ public class Statistics {
 	 * @param records tutti i file presenti
 	 * @param subfolder cartella dove effettuare la statistica
 	 * @return type HashMap<String, Integer> tabella che rappresenta quanti file sono presenti per ogni tipo nella cartella scelta
+	 * @throws SubfolderNotFoundException 
 	 */
-	public static HashMap<String, Integer> getFileType(List<RecordFile> records, String subfolder){
+	public static HashMap<String, Integer> getFileType(List<RecordFile> records, String subfolder) throws SubfolderNotFoundException{
 		HashMap<String, Integer> type = new HashMap<String, Integer>();
 		for(Record r:records) {
 			Integer i=0;
@@ -197,6 +202,7 @@ public class Statistics {
 				else type.put(format[format.length-1], ++i);
 			}
 		}
+		if(type.isEmpty())  throw new SubfolderNotFoundException();
 		return type;
 	}
 	
@@ -207,8 +213,9 @@ public class Statistics {
 	 * @param records tutti i file eliminati
 	 * @param subfolder cartella dove effettuare la statistica
 	 * @return type HashMap<String, Integer> tabella che rappresenta quanti file sono presenti per ogni tipo nella cartella scelta
+	 * @throws SubfolderNotFoundException 
 	 */
-	public static HashMap<String, Integer> getDeletedFileType(List<RecordDeleted> records, String subfolder){
+	public static HashMap<String, Integer> getDeletedFileType(List<RecordDeleted> records, String subfolder) throws SubfolderNotFoundException{
 		HashMap<String, Integer> type = new HashMap<String, Integer>();
 		for(Record r:records) {
 			Integer i=0;
@@ -230,6 +237,7 @@ public class Statistics {
 					else type.put(format[format.length-1], ++i);
 			}
 		}
+		if(type.isEmpty())  throw new SubfolderNotFoundException();
 		return type;
 	}
 }

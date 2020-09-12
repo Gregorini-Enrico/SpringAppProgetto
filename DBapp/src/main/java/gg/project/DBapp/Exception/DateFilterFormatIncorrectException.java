@@ -6,7 +6,7 @@ public class DateFilterFormatIncorrectException extends FilterIncorrectException
 
 	@Override
 	public String getMessage() {
-		return "Il filtro è incorretto!!  Es: { date: { between: [datainizio,datafine]}}";
+		return "Il filtro è incorretto!!";
 	}
 
 }

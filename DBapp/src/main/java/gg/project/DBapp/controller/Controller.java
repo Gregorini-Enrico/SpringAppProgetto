@@ -63,12 +63,12 @@ public class Controller {
 	 * @author Daniele Gjeka
 	 */
 	@RequestMapping(value="/statistics/media", method = RequestMethod.GET)
-	public ResponseEntity<Object> getMedia(@RequestParam (name = "file", defaultValue = "file") String file,
+	public ResponseEntity<Object> getMedia(@RequestParam (name = "file") String file,
                                            @RequestParam (name="subfolder", defaultValue = "")String subfolder) throws SubfolderNotFoundException{
 		if(file.equals("file"))
-		     return new ResponseEntity<>(Statistics.media(Storage.downloadFile(), subfolder), HttpStatus.OK);
+		     return new ResponseEntity<>("La dimensione media dei file è: "+String.valueOf(Statistics.media(Storage.downloadFile(), subfolder))+" MB", HttpStatus.OK);
 		else if(file.equals("deleted"))
-			return new ResponseEntity<>(Statistics.mediaDeletedFile(DeletedFiles.downloadDeletedFiles(), subfolder), HttpStatus.OK);
+			return new ResponseEntity<>("La dimensione media dei file è: "+String.valueOf(Statistics.mediaDeletedFile(DeletedFiles.downloadDeletedFiles(), subfolder))+" MB", HttpStatus.OK);
 		else return new ResponseEntity<>("Param not valid", HttpStatus.OK);
 	}
 	
@@ -83,7 +83,7 @@ public class Controller {
 	 * @author Daniele Gjeka/
 	 */
 	@RequestMapping(value="/statistics/max", method = RequestMethod.GET)
-	public ResponseEntity<Object> getMax(@RequestParam (name = "file", defaultValue = "file") String file,
+	public ResponseEntity<Object> getMax(@RequestParam (name = "file") String file,
                                          @RequestParam (name="subfolder", defaultValue = "")String subfolder) throws SubfolderNotFoundException{
 		if(file.equals("file"))
 		     return new ResponseEntity<>(Statistics.maxDimFile(Storage.downloadFile(), subfolder), HttpStatus.OK);
@@ -103,7 +103,7 @@ public class Controller {
 	 * @author Daniele Gjeka/
 	 */
 	@RequestMapping(value="/statistics/min", method = RequestMethod.GET)
-	public ResponseEntity<Object> getMin(@RequestParam (name = "file", defaultValue = "file") String file,
+	public ResponseEntity<Object> getMin(@RequestParam (name = "file") String file,
 			                             @RequestParam (name="subfolder", defaultValue = "")String subfolder) throws SubfolderNotFoundException{
 		if(file.equals("file"))
 		      return new ResponseEntity<>(Statistics.minDimFile(Storage.downloadFile(), subfolder), HttpStatus.OK);
@@ -112,9 +112,18 @@ public class Controller {
 	    else return new ResponseEntity<>("Param not valid", HttpStatus.OK);
 	}
 	
+	
+	
+	/**
+	 * Metodo che restituisce il numero di file per ogni formato presente nella sottocartella scelta dall'utente
+	 * @param file distingue se l'utente vuole la media dei file eliminati eliminati o no
+	 * @param subfolder stringa che definisce se fare la media di una sottocartella in particolare o di quella principale
+	 * @return HashMap<String,Integer> tabella in cui per ogni tipo di file è presente il numero di Record di quel formato 
+	 * @throws SubfolderNotFoundException
+	 */
 	@RequestMapping(value="/statistics/type", method = RequestMethod.GET)
-	public ResponseEntity<Object> getType(@RequestParam (name="file", defaultValue = "file") String file,
-			                              @RequestParam (name="subfolder", defaultValue = "")String subfolder){
+	public ResponseEntity<Object> getType(@RequestParam (name="file") String file,
+			                              @RequestParam (name="subfolder", defaultValue = "")String subfolder) throws SubfolderNotFoundException{
 		if(file.equals("file"))
 		     return new ResponseEntity<>(Statistics.getFileType(Storage.downloadFile(), subfolder), HttpStatus.OK);
 		else if(file.equals("deleted"))
@@ -124,7 +133,11 @@ public class Controller {
 	
 	
 	
-	
+	/**
+	 * Metodo che effettua il restore dei file scelti dall'utente
+	 * @param filter RequestBody della richiesta POST
+	 * @return messaggio che conferma se l'operazione è avvenuta con successo oppure no
+	 */
 	@RequestMapping(value="/restore", method = RequestMethod.POST)
 	public ResponseEntity<String> FileRestore(@RequestBody String filter){
 	    if(service.RestoreFile(filter))
@@ -132,6 +145,13 @@ public class Controller {
 	    else return new ResponseEntity<>("L'operazione non è avvenuta con successo!", HttpStatus.BAD_REQUEST);
 	}
 	
+	
+	/**
+	 * Metodo che restituisce la lista di Record con lo specifico filtro
+	 * @param filter RequestBody della richiesta POST
+	 * @param file distingue se l'utente vuole la media dei file eliminati eliminati o no
+	 * @return lista di file filtrata
+	 */
 	@RequestMapping(value="/filter", method = RequestMethod.POST)
 	public ResponseEntity<Object> TypeRestore(@RequestBody String filter, @RequestParam (name = "file")String file){
 		if(file.equals("file"))
