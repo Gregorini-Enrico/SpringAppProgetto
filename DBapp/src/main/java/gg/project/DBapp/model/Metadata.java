@@ -15,7 +15,7 @@ public class Metadata {
 		metadata.put("tag", "tipologia di elemento('folder','file','deleted')");
 		metadata.put("path_lower", "path del file");
 		metadata.put("id", "identificativo univoco del file");
-		metadata.put("client_modified", "informazioni (data, ora) sulla modifica del file su DB");
+		metadata.put("client_modified", "informazioni (data, ora) sulla modifica/cancellazione del file");
 		metadata.put("rev", "codice univoco per ogni tipologia di file(.txt, .pdf, .docx ecc) per il restore");
 		metadata.put("size", "dimensione del file in byte");
 		return metadata;
