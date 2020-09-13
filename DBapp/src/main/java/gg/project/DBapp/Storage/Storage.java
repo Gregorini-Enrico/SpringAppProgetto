@@ -19,8 +19,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import gg.project.DBapp.model.*;
 import gg.project.DBapp.model.Record;
 
+/**
+ * Classe che permette di acquisire tutti i dati riguardanti i file della cartella dropbox
+ * utilizza la chiamata /files/list_folder dell'API dropbox
+ * @author Enrico Gregorini
+ * @author Daniele Gjeka
+ */
 public class Storage {
 
+	/**
+	 * Metodo che restituisce tutti i Record (sia file che cartelle)
+	 * @return lista di Record
+	 * @author Enrico Gregorini
+	 * @author Daniele Gjeka 
+	 */
 	public static ArrayList<Record> download() {
 
 		String url = "https://api.dropboxapi.com/2/files/list_folder";  //url per fare richiesta all'API dropbox
@@ -76,7 +88,12 @@ public class Storage {
 	}
 	
 	
-	
+	/**
+	 * Metodo che restituisce tutti i file con tutti i campi utili per i filtri e statistiche
+	 * @return lista di RecordFile
+	 * @author Enrico Gregorini
+	 * @author Daniele Gjeka 
+	 */
 	public static ArrayList<RecordFile> downloadFile() {
 
 		String url = "https://api.dropboxapi.com/2/files/list_folder";
@@ -127,6 +144,6 @@ public class Storage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return Data.getOnlyFile(p);
+		return Data.getOnlyFile(p);  //restituisco la lista di file con tutti i campi riempiti
 	}
 }

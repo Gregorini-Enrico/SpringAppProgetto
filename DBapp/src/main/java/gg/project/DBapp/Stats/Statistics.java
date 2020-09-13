@@ -7,6 +7,11 @@ import java.util.regex.Pattern;
 import gg.project.DBapp.Exception.SubfolderNotFoundException;
 import gg.project.DBapp.model.*;
 
+/**
+ * Classe per gestire le richieste riguardanti le statistiche sui dati 
+ * @author Enrico Gregorini
+ * @author Daniele Gjeka
+ */
 public class Statistics {
 		
 	/**

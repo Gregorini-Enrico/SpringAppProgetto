@@ -1,5 +1,11 @@
 package gg.project.DBapp.model;
 
+/**
+ * Classe che rappresenta i file presenti nella cartella dropbox
+ * essa estende la classe Record
+ * @author Enrico Gregorini
+ * @author Daniele Gjeka 
+ */
 public class RecordFile extends Record{
 	
 	private String id;

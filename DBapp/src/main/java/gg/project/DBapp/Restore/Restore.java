@@ -1,6 +1,5 @@
 package gg.project.DBapp.Restore;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,8 +11,21 @@ import java.util.List;
 
 import gg.project.DBapp.model.*;
 
+/**
+ * Classe per effettuare il restore dei file scelti dall'utente 
+ * @author Enrico Gregorini
+ * @author Daniele Gjeka 
+ */
 public class Restore {
 	
+	/**
+	 * Metodo che effettua la chiamata POST alla rotta https://api.dropboxapi.com/2/files/restore per il restore dei file
+	 * a questo metodo viene passata la lista già filtrata dei file che si vogliono ripristinare
+	 * @param FilteredList lista filtrata di file eliminati
+	 * @return true se l'operazione è avvenuta con successo, false se non è avvenuta con successo
+	 * @author Enrico Gregorini
+     * @author Daniele Gjeka
+	 */
 	public static boolean restore(List<RecordDeleted> FilteredList) {
 		
 		String url = "https://api.dropboxapi.com/2/files/restore";

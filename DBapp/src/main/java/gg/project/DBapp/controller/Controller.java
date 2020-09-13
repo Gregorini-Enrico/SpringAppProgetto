@@ -10,7 +10,11 @@ import gg.project.DBapp.Stats.Statistics;
 import gg.project.DBapp.Storage.*;
 import gg.project.DBapp.service.PrincipalService;
 
-
+/**
+ * Spring controller per gestire le chiamate effettuate dall'utente
+ * @author Enrico Gregorini
+ * @author Daniele Gjeka
+ */
 @RestController	
 public class Controller {
 	

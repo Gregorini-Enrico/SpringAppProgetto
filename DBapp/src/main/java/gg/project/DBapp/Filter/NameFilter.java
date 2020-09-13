@@ -9,6 +9,8 @@ import gg.project.DBapp.model.*;
 /**
  * classe per filtrare attraverso il path per il restore
  * l'utente inserisce il path del file che vuole ripristinare 
+ * @author Enrico Gregorini
+ * @author Daniele Gjeka
  */
 public class NameFilter {
 	

@@ -5,6 +5,12 @@ import java.util.*;
 import gg.project.DBapp.model.*;
 import gg.project.DBapp.Exception.*;
 
+/**
+ * Classe per implementare i filtri sulle date
+ * restituisce file dopo, prima e durante l'intervallo temporale inserito dall'utente
+ * @author Enrico Gregorini
+ * @author Daniele Gjeka
+ */
 public class DateFilter {
 	
 	/**

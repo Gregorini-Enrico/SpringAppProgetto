@@ -2,6 +2,11 @@ package gg.project.DBapp.model;
 
 import java.util.HashMap;
 
+/**
+ * Classe che serve per restituire i metadata per una richiesta GET
+ * @author Enrico Gregorini
+ * @author Daniele Gjeka
+ */
 public class Metadata {
           
 	public static HashMap<String,String> getFileMetadata(){

@@ -1,5 +1,11 @@
 package gg.project.DBapp.model;
 
+/**
+ * Classe che rappresenta i file eliminati nella cartella dropbox
+ * essa estende la classe Record
+ * @author Enrico Gregorini
+ * @author Daniele Gjeka 
+ */
 public class RecordDeleted extends Record{
 	
 	private String id;

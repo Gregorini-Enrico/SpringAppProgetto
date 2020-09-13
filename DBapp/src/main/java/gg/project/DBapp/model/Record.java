@@ -1,5 +1,11 @@
 package gg.project.DBapp.model;
 
+/**
+ * Superclasse Record che contiene gli attributi comuni a tutti i file/cartelle presenti nella cartella dropbox
+ * le classi figlie poi erediteranno questi attributi e i metodi get e set associati
+ * @author Enrico Gregorini
+ * @author Daniele Gjeka
+ */
 public class Record {
         private String name;
         private String tag;

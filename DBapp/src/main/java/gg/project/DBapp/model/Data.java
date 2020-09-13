@@ -4,6 +4,11 @@ import java.util.*;
 import gg.project.DBapp.Storage.DeletedParser;
 import gg.project.DBapp.Storage.Parser;
 
+/**
+ * Classe utilizzata per parsare i dati ottenuti dall'API dropbox
+ * @author Enrico Gregorini
+ * @author Daniele Gjeka
+ */
 public class Data {
 	
 	/**
