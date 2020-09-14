@@ -29,3 +29,47 @@ QUI CI VA LA FOTO CON TUTTI I PACCHETTI DEL PROGETTO
 Ovviamente in seguito per ogni pacchetto abbiamo sviluppato tutte le varie classi che andavano ad implementare il progetto, così facendo abbiamo creato l'UML Class Diagram.
 
 ORA PER OGNI PACCHETTO MOSTRIAMO TUTTE LE CLASSI CHE COMPONGONO IL PROGETTO
+
+gg.project.DBapp.controller
+Package che contiene il controller dell'applicazione, ovvero la classe che gestisce tutte le chiamate GET o POST dell'utente.
+<a href> diagramma delle classi di gg.project.DBapp.controller </a href>
+
+gg.project.DBapp.Storage
+Package che gestisce il download dei dati direttamente dalle chiamate alla dropbox API.
+<a href> diagramma delle classi di gg.project.DBapp.Storage </a href>
+
+gg.project.DBapp.model
+Package che contiene tutte le classi che servono a parsare i dati ottenuti (Parser, DeletedParser) e a implementare un oggetto, file dropbox, tramite la classe Record e sue figlie.
+<a href> diagramma delle classi di gg.project.DBapp.model </a href>
+
+gg.project.DBapp.service
+Package che restituisce i dati che andranno poi passati al controller (e quindi in risposta all'utente) e interpreta i filtri in formato JSON, inseriti nelle richieste POST.
+<a href> diagramma delle classi di gg.project.DBapp.model </a href>
+
+gg.project.DBapp.Stats
+Package che implementa le statistiche sui file presenti nelle varie cartelle dropbox.
+<a href> diagramma delle classi di gg.project.DBapp.Stats </a href>
+
+gg.project.DBapp.Filter
+Package che implementa i filtri: i filtri si possono applicare direttamente sul nome di file, sul tipo o sulla data di modifica.
+<a href> diagramma delle classi di gg.project.DBapp.Stats </a href>
+
+gg.project.DBapp.Restore
+Package che implementa l'obiettivo dell'applicazione ovvero quello di effettuare il restore dei file scelti dall'utente in base ai filtri.ù
+<a href> diagramma delle classi di gg.project.DBapp.Stats </a href>
+
+gg.project.DBapp.Exception
+Package che gestisce le varie eccezioni che possono essere lanciate all'interno del programma.
+<a href> diagramma delle classi di gg.project.DBapp.Exception </a href>
+
+
+
+
+
+
+
+
+
+
+
+
