@@ -24,7 +24,7 @@ La prima parte del lavoro è stata quella di pensare a come strutturare il proge
 
 Per fare tutto ciò abbiamo iniziato a pensare ai vari pacchetti che ci sarebbero serviti per suddividere il nostro lavoro al meglio rendendolo il più semplice e chiaro possibile anche per lo sviluppo del codice poi.
 
-<A HREF= "https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Pacchetti.PNG"> </A>
+![Immagine del diagramma dei pacchetti](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Pacchetti.PNG)
 
 Ovviamente in seguito per ogni pacchetto abbiamo sviluppato tutte le varie classi che andavano ad implementare il progetto, così facendo abbiamo creato l'UML Class Diagram.
 
