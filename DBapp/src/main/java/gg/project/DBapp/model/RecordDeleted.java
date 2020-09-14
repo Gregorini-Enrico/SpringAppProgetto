@@ -1,7 +1,7 @@
 package gg.project.DBapp.model;
 
 /**
- * Classe che rappresenta i file eliminati nella cartella dropbox
+ * Classe che rappresenta i file eliminati nella cartella dropbox,
  * essa estende la classe Record
  * @author Enrico Gregorini
  * @author Daniele Gjeka 

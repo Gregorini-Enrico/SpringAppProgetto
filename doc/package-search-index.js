@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"gg.project.DBapp"},{"l":"gg.project.DBapp.controller"},{"l":"gg.project.DBapp.Exception"},{"l":"gg.project.DBapp.Filter"},{"l":"gg.project.DBapp.model"},{"l":"gg.project.DBapp.Restore"},{"l":"gg.project.DBapp.service"},{"l":"gg.project.DBapp.Stats"},{"l":"gg.project.DBapp.Storage"}]
