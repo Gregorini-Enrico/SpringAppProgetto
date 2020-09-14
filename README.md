@@ -24,7 +24,7 @@ La prima parte del lavoro è stata quella di pensare a come strutturare il proge
 
 Per fare tutto ciò abbiamo iniziato a pensare ai vari pacchetti che ci sarebbero serviti per suddividere il nostro lavoro al meglio rendendolo il più semplice e chiaro possibile anche per lo sviluppo del codice poi.
 
-QUI CI VA LA FOTO CON TUTTI I PACCHETTI DEL PROGETTO
+<A HREF= "https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Pacchetti.PNG"> </A>
 
 Ovviamente in seguito per ogni pacchetto abbiamo sviluppato tutte le varie classi che andavano ad implementare il progetto, così facendo abbiamo creato l'UML Class Diagram.
 
@@ -64,6 +64,20 @@ Package che gestisce le varie eccezioni che possono essere lanciate all'interno 
 
 # Funzionamento
 
+Mostriamo ora come utilizzare l'applicazione attraverso le sue chiamate e come quest'ultime funzionano.
+
+## Chiamate 
+
+| ROTTA | METODO | DESCRIZIONE |
+|-|-|-|
+| /files | GET | per ottenere la lista di tutti i file presenti (sia file o file eliminati che cartelle) |
+| /files/deleted | GET | per ottenere solo la lista dei file eliminati con più dettagli |
+| /metadata | GET | per ottenere i metadata ovvero i campi che utilizzerà la nostra applicazione<br>per produrre statistiche e applicare filtri |
+| /statistics | GET | per ricevere statistiche sui dati |
+| /filter | POST | per filtrare la ricerca attraverso vari campi |
+| /restore | POST | per ripristinare file scelti dall'utente attraverso filtri |
+
+
 ## Statistiche 
 
 L'applicazione analizza i file presenti in dropbox e effettua statistiche su di essi. Le statistiche vengono effettuate attraverso richieste GET a diverse rotte che a questo indirizzo localhost:8080/statistics/ di seguito poi la rotta che si preferisce. <br>
@@ -81,7 +95,23 @@ Ci sono dei parametri da immettere per personalizzare quest'ultime, quali:
 ## Filtri 
 
 Inoltre sono stati implementati anche diversi filtri sia per quanto riguarda i file da ripristinare sia nel caso in cui l'utente ricerchi una tipologia di file specifica.
-Vi sono tre diverse tipologie di filtri: 
+Questa chiamata è gestita alla rotta <B> localhost:8080/filter </B> tramite metodo <B> POST </B>. 
+Vi sono tre diverse tipologie di filtri in base al campo che si sceglie: 
+| CAMPO | PARAMS | BODY | DESCRIZIONE |
+|-|-|-|-|
+| path | file | "path": "<U>percorso del file</U>" | restituisce il file al percorso desiderato |
+| type | file | "type": "<U> tipo del file </U>" | restituisce tutti i file del tipo inserito |
+| date | file | "date": {"after" : "<U> data </U>"}<br>  "date": {"before" : "<U> data </U>"}<br>  "date": {"between" : <U>["data1", "data2"]</U> | restituisce i file modificati dopo della data inserita <br>restituisce i file modificati prima della data inserita <br>restituisce i file modificati durante l'intervallo inserito |
+
+Per rendere più chiare queste chiamate mostriamo il diagramma delle sequenze, nel caso in cui l'utente scelga di filtrare il campo type (mostriamo questo esempio perchè in sostanza quello che fa l'applicazione è molto simile in tutti i casi, cambiando semplicemente l'ultima classe che gestisce il filtro del proprio campo) <br>
+<A HREF=""> </A>
+
+## Restore
+
+Come detto già in precedenza l'obiettivo della nostra applicazione è quello di ripristinare file scelti dall'utente in base al file, al tipo e alla data di cancellazione di quest'ultimo. Il ragionamento è molto simile a quello fatto per i filtri infatti essi sono gli stessi anche per quanto riguarda il restore, ovvero si va a scegliere il file, o i file, tramite la body (esattamente come abbiamo mostrato nella sezione sui filtri) della richiesta <B> POST </B> alla rotta <B> localhost:8080/restore </B>. 
+
+Di seguito mostriamo il diagramma delle sequenze per la chiamata che effettua il restore dei file: 
+<A HREF=""> </A>
 
 
 
