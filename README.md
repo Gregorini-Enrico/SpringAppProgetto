@@ -111,9 +111,18 @@ Per rendere più chiare queste chiamate mostriamo il diagramma delle sequenze, n
 Come detto già in precedenza l'obiettivo della nostra applicazione è quello di ripristinare file scelti dall'utente in base al file, al tipo e alla data di cancellazione di quest'ultimo. Il ragionamento è molto simile a quello fatto per i filtri infatti essi sono gli stessi anche per quanto riguarda il restore, ovvero si va a scegliere il file, o i file, tramite la body (esattamente come abbiamo mostrato nella sezione sui filtri) della richiesta <B> POST </B> alla rotta <B> localhost:8080/restore </B>. 
 
 Di seguito mostriamo il diagramma delle sequenze per la chiamata che effettua il restore dei file: 
-<A HREF=""> </A>
 
 
+# Componenti 
+
+#### Enrico Gregorini
+#### Daniele Gjeka
+
+Il lavoro mostrato è stato sviluppato per la maggior parte insieme, sia di persona che in via telematica. Ci sono state parti del progetto su cui ha lavorato maggiormente 
+uno e altre prese in carico dall'altro componente, infatti: 
+* Daniele Gjeka ha elaborato tutti i diagrammi UML (tramite UML designer), commentato il codice e generato la documentazione javadoc.
+* Enrico Gregorini ha sviluppato la parte delle statistiche e filtri.
+Il resto del lavoro è stato svolto insieme così da rimanere sempre aggiornati passo passo sugli avanzamenti del progetto. 
 
 
 
