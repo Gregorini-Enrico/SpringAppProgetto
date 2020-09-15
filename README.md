@@ -13,7 +13,7 @@ Oltre questo la nostra applicazione permette di analizzare i dati contententi la
 
 Per mostrare tutti questi passi al meglio, mostriamo il diagramma UML dei casi d'suo così da introdurre nella maniera più semplice possibile al funzionamento del progetto: 
 
-UML CASI D'USO
+![Immagine del diagramma dei casi d'uso](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Use%20Case%20Diagram.PNG)
 
 # 1° passo: UML CLASS DIAGRAM
 La prima parte del lavoro è stata quella di pensare a come strutturare il progetto e per fare ciò ci è stato molto utile, l'UML ovvero Unified Modeling Language. In questa prima parte abbiamo iniziato a pensare al funzionamento della nostra applicazione: 
@@ -24,42 +24,43 @@ La prima parte del lavoro è stata quella di pensare a come strutturare il proge
 
 Per fare tutto ciò abbiamo iniziato a pensare ai vari pacchetti che ci sarebbero serviti per suddividere il nostro lavoro al meglio rendendolo il più semplice e chiaro possibile anche per lo sviluppo del codice poi.
 
-![Immagine del diagramma dei pacchetti](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Pacchetti.PNG)
+![Immagine del diagramma dei pacchetti](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Package.PNG)
 
 Ovviamente in seguito per ogni pacchetto abbiamo sviluppato tutte le varie classi che andavano ad implementare il progetto, così facendo abbiamo creato l'UML Class Diagram.
 
 
-<B> gg.project.DBapp.controller </B> <br>
+### gg.project.DBapp.controller  <br> <br> 
 Package che contiene il controller dell'applicazione, ovvero la classe che gestisce tutte le chiamate GET o POST dell'utente.
-<a href="diagramma delle classi di gg.project.DBapp.controller"> </a>
+![controller class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/Controller.PNG)
 
-<B> gg.project.DBapp.Storage </B> <br>
+### gg.project.DBapp.Storage  <br> <br>
 Package che gestisce il download dei dati direttamente dalle chiamate alla dropbox API.
-<a href="diagramma delle classi di gg.project.DBapp.Storage"> </a>
+![Storage class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/Storage.PNG)
 
-<B> gg.project.DBapp.model </B> <br>
+### gg.project.DBapp.model  <br> <br>
 Package che contiene tutte le classi che servono a parsare i dati ottenuti (Parser, DeletedParser) e a implementare un oggetto, file dropbox, tramite la classe Record e sue figlie.
-<A HREF="diagramma delle classi di gg.project.DBapp.model"> </A>
+![Model class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/Model.PNG)
 
-<B> gg.project.DBapp.service </B> <br>
+### gg.project.DBapp.service  <br> <br>
 Package che restituisce i dati che andranno poi passati al controller (e quindi in risposta all'utente) e interpreta i filtri in formato JSON, inseriti nelle richieste POST.
-<A HREF="diagramma delle classi di gg.project.DBapp.service"> </A>
 
-<B> gg.project.DBapp.Stats </B> <br>
-Package che implementa le statistiche sui file presenti nelle varie cartelle dropbox.
-<A HREF="diagramma delle classi di gg.project.DBapp.Stats"> </A>
+![Service class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/Service.PNG)
 
-<B> gg.project.DBapp.Filter </B> <br>
+### gg.project.DBapp.Stats <br> <br>
+Package che implementa le statistiche sui file presenti nelle varie cartelle dropbox. <br>
+![Stats class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/Statistics.PNG)
+
+### gg.project.DBapp.Filter <br> <br>
 Package che implementa i filtri: i filtri si possono applicare direttamente sul nome di file, sul tipo o sulla data di modifica.
-<A HREF="diagramma delle classi di gg.project.DBapp.Filter"> </A>
+![Filter class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/Filter.PNG)
 
-<B> gg.project.DBapp.Restore </B> <br>
+### gg.project.DBapp.Restore <br> <br>
 Package che implementa l'obiettivo dell'applicazione ovvero quello di effettuare il restore dei file scelti dall'utente in base ai filtri.
-<A HREF="diagramma delle classi di gg.project.DBapp.Restore"> </A>
+![Restore class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/Restore.PNG)
 
-<B> gg.project.DBapp.Exception </B> <br>
+### gg.project.DBapp.Exception <br> <br>
 Package che gestisce le varie eccezioni che possono essere lanciate all'interno del programma.
-<A HREF="diagramma delle classi di gg.project.DBapp.Exception"> </A>
+![Exception class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/Exception.PNG)
 
 
 # Funzionamento
@@ -77,6 +78,9 @@ Mostriamo ora come utilizzare l'applicazione attraverso le sue chiamate e come q
 | /filter | POST | per filtrare la ricerca attraverso vari campi |
 | /restore | POST | per ripristinare file scelti dall'utente attraverso filtri |
 
+Di seguito mostriamo il diagramma delle sequenze di una delle prime chiamate, ovvero quella che restituisce la lista di tutti i file presenti nella cartella principale dropbox, quindi senza distinzioni di tipo (sia file, file eliminati che cartelle).
+
+![getFiles use case diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Sequence%20Diagram/file.PNG)
 
 ## Statistiche 
 
@@ -92,6 +96,8 @@ Ci sono dei parametri da immettere per personalizzare quest'ultime, quali:
 | /statistics/min | file, subfolder | restituisce il file con la dimensione minore |
 | /statistics/type | file , subfolder | restituisce una tabella che mostra quanti file <br>sono presenti nella cartella scelta per ogni tipo |
 
+![getStats use case diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Sequence%20Diagram/statis%20type.PNG)
+
 ## Filtri 
 
 Inoltre sono stati implementati anche diversi filtri sia per quanto riguarda i file da ripristinare sia nel caso in cui l'utente ricerchi una tipologia di file specifica.
@@ -104,14 +110,14 @@ Vi sono tre diverse tipologie di filtri in base al campo che si sceglie:
 | date | file | "date": {"after" : "<U> data </U>"}<br>  "date": {"before" : "<U> data </U>"}<br>  "date": {"between" : <U>["data1", "data2"]</U> | restituisce i file modificati dopo della data inserita <br>restituisce i file modificati prima della data inserita <br>restituisce i file modificati durante l'intervallo inserito |
 
 Per rendere più chiare queste chiamate mostriamo il diagramma delle sequenze, nel caso in cui l'utente scelga di filtrare il campo type (mostriamo questo esempio perchè in sostanza quello che fa l'applicazione è molto simile in tutti i casi, cambiando semplicemente l'ultima classe che gestisce il filtro del proprio campo) <br>
-<A HREF=""> </A>
+![getStats use case diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Sequence%20Diagram/filter%20seq.PNG)
 
 ## Restore
 
 Come detto già in precedenza l'obiettivo della nostra applicazione è quello di ripristinare file scelti dall'utente in base al file, al tipo e alla data di cancellazione di quest'ultimo. Il ragionamento è molto simile a quello fatto per i filtri infatti essi sono gli stessi anche per quanto riguarda il restore, ovvero si va a scegliere il file, o i file, tramite la body (esattamente come abbiamo mostrato nella sezione sui filtri) della richiesta <B> POST </B> alla rotta <B> localhost:8080/restore </B>. 
 
 Di seguito mostriamo il diagramma delle sequenze per la chiamata che effettua il restore dei file: 
-
+![getFilter use case diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Sequence%20Diagram/restore%20seq.PNG)
 
 # Componenti 
 
