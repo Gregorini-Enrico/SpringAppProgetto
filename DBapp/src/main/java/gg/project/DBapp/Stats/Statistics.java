@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 import gg.project.DBapp.Exception.SubfolderNotFoundException;
+import gg.project.DBapp.Storage.Storage;
 import gg.project.DBapp.model.*;
 
 /**
@@ -23,15 +24,26 @@ public class Statistics {
 	 * @throws SubfolderNotFoundException 
 	 * @author Enrico gregorini
 	 * @author Daniele Gjeka
-	 * */
+	 */
 	public static double media(List<RecordFile> records, String subfolder) throws SubfolderNotFoundException {
-		double s = 0;
+		double s = 0;  //variabile per calcolare la media
+		
+		if(!subfolder.isEmpty()) {
+		   int i = 0;  //contatore per verificare che la subfolder sia esistente
+		   ArrayList<RecordFolder> folders = Storage.downloadFolder();
+	       for(RecordFolder folder: folders) {
+	    	 if(!folder.getName().equalsIgnoreCase(subfolder)) i++;   //ignoro le maiuscole per un problema tra nome e Path_lower
+	    	 if(i==folders.size())   throw new SubfolderNotFoundException();
+	       }
+	       subfolder = subfolder.toLowerCase();
+		}
+	    
 		for(RecordFile f:records) {
 			if(!subfolder.isEmpty()) { //controllo se la sottocartella è vuota o no
-				if(f.getPath_lower().contains(subfolder)) {  //se non è vuota controllo se il file sia dentro la cartella
-			         double KB = f.getSize()/(1024*1024); //calcolo la dimensione in MB
-			         s += KB;
-				}
+				 if(f.getPath_lower().contains(subfolder)) {  //se non è vuota controllo se il file sia dentro la cartella
+			            double KB = f.getSize()/(1024*1024); //calcolo la dimensione in MB
+			            s += KB;
+				 }
 			}
 			else{   //se subfolder è vuota, prendo tutti i file della lista
 				    if(f.getPath_lower().contains(subfolder)) {
@@ -40,7 +52,7 @@ public class Statistics {
 			        }  
 			}
 		}
-		if(s==0)  throw new SubfolderNotFoundException();
+		//if(s==0)  throw new SubfolderNotFoundException();
 		double media = s/records.size(); //calcolo la media in MB
 		media = Math.round(media*100);   media /= 100;  //arrotondo la media a 2 cifre decimali
 		return media; //ritorno la media
@@ -57,7 +69,9 @@ public class Statistics {
 	 * @author Daniele Gjeka
 	 */
 	public static double mediaDeletedFile(List<RecordDeleted> Drecords, String subfolder) throws SubfolderNotFoundException {
-		double s = 0;
+		double s = 0;  //variabile per calcolare la media
+		
+		
 		for(RecordDeleted f:Drecords){
 			if(!subfolder.isEmpty()) {  //controllo se la sottocartella è vuota o no
 				if(f.getPath_lower().contains(subfolder)) {    //se non è vuota controllo se il file sia dentro la cartella
@@ -92,6 +106,17 @@ public class Statistics {
 	 */
 	public static RecordFile maxDimFile(List<RecordFile> records, String subfolder) throws SubfolderNotFoundException {
 		RecordFile max = new RecordFile();
+		
+		if(!subfolder.isEmpty()) {
+		   int i = 0;  //contatore per verificare che la subfolder sia esistente
+		   ArrayList<RecordFolder> folders = Storage.downloadFolder();
+	       for(RecordFolder folder: folders) {
+	    	  if(!folder.getName().equalsIgnoreCase(subfolder)) i++;   //ignoro le maiuscole per un problema tra nome e Path_lower
+	    	  if(i==folders.size())   throw new SubfolderNotFoundException();
+	       }
+	       subfolder = subfolder.toLowerCase();
+		}
+		
 		for(RecordFile r:records){ 
 			if(!subfolder.isEmpty()) {   //controllo se la sottocartella è vuota o no
 			    if(r.getPath_lower().contains(subfolder))   //se non è vuota controllo se il file sia dentro la cartella
@@ -114,6 +139,7 @@ public class Statistics {
 	 */
 	public static RecordDeleted maxDimFileDeleted(List<RecordDeleted> Drecords, String subfolder) throws SubfolderNotFoundException {
 		RecordDeleted max = new RecordDeleted();
+	    
 		for(RecordDeleted r:Drecords){ 
 			if(!subfolder.isEmpty()) {   //controllo se la sottocartella è vuota o no
 			    if(r.getPath_lower().contains(subfolder))  //se non è vuota controllo se il file sia dentro la cartella
@@ -136,6 +162,17 @@ public class Statistics {
 	 */
 	public static RecordFile minDimFile(List<RecordFile> records, String subfolder) throws SubfolderNotFoundException {
 		RecordFile min = new RecordFile();
+		
+		if(!subfolder.isEmpty()) {
+		   int i = 0;  //contatore per verificare che la subfolder sia esistente
+		   ArrayList<RecordFolder> folders = Storage.downloadFolder();
+	       for(RecordFolder folder: folders) {
+	    	  if(!folder.getName().equalsIgnoreCase(subfolder)) i++;   //ignoro le maiuscole per un problema tra nome e Path_lower
+	    	  if(i==folders.size())   throw new SubfolderNotFoundException();
+	       }
+	       subfolder = subfolder.toLowerCase();
+		}
+		
 		min.setSize(100000000);
 		for(RecordFile r:records){ 
 			if(!subfolder.isEmpty()) {    //controllo se la sottocartella è vuota o no
@@ -159,6 +196,7 @@ public class Statistics {
 	 */
 	public static RecordDeleted minDimFileDeleted(List<RecordDeleted> Drecords, String subfolder) throws SubfolderNotFoundException {
 		RecordDeleted min = new RecordDeleted();
+	    
 		min.setSize(100000000);
 		for(RecordDeleted r:Drecords) { 
 			if(!subfolder.isEmpty()) {    //controllo se la sottocartella è vuota o no
@@ -172,11 +210,7 @@ public class Statistics {
 	}
 	
 	
-	
-	
-	
-	
-	
+
 	/**
 	 * Metodo che restituisce il numero di file presenti per ogni tipo presente nella cartella subfolder inserita dall'utente
 	 * se subfolder è vuota prende la cartella principale
@@ -187,24 +221,34 @@ public class Statistics {
 	 */
 	public static HashMap<String, Integer> getFileType(List<RecordFile> records, String subfolder) throws SubfolderNotFoundException{
 		HashMap<String, Integer> type = new HashMap<String, Integer>();
+
+		if(!subfolder.isEmpty()) {
+		   int i = 0;  //contatore per verificare che la subfolder sia esistente
+		   ArrayList<RecordFolder> folders = Storage.downloadFolder();
+	       for(RecordFolder folder: folders) {
+	    	  if(!folder.getName().equalsIgnoreCase(subfolder)) i++;   //ignoro le maiuscole per un problema tra nome e Path_lower
+	    	  if(i==folders.size())   throw new SubfolderNotFoundException();
+	       }
+	       subfolder = subfolder.toLowerCase();
+		}
 		for(Record r:records) {
-			Integer i=0;
+			Integer x=0;
 			String[] format = r.getName().split(Pattern.quote("."));
 			if(!subfolder.isEmpty()) {   //controllo se la sottocartella è vuota o no
 			   if(r.getPath_lower().contains(subfolder)) {    //se non è vuota controllo se il file sia dentro la cartella
 			      if(type.containsKey(format[format.length-1])) {  //controllo se in type è già presente un file di quel formato.. format[format.length-1] sarebbe il formato del file preso in considerazione in questa iterazione del for-each
-				     i = type.get(format[format.length-1])+1;  //se è già presente incremento di uno il contatore di quel formato specifico, contatore ovvero la variabile i
-				     type.put(format[format.length-1], i);     //inserisco nell'HashMap type il nuovo valore di i associato al suo formato
+				     x = type.get(format[format.length-1])+1;  //se è già presente incremento di uno il contatore di quel formato specifico, contatore ovvero la variabile i
+				     type.put(format[format.length-1], x);     //inserisco nell'HashMap type il nuovo valore di i associato al suo formato
 			      }
-			      else type.put(format[format.length-1], ++i);   //se non è presente quel formato inserisco in type il formato con il suo contatore i che lo vado a preincrementare(per settarlo a 1 essendo prima a 0 perchè non era presente quel formato) 
+			      else type.put(format[format.length-1], ++x);   //se non è presente quel formato inserisco in type il formato con il suo contatore i che lo vado a preincrementare(per settarlo a 1 essendo prima a 0 perchè non era presente quel formato) 
 			   }
 			}
 			else {    //se subfolder è vuota, prendo tutti i file della lista
 				if(type.containsKey(format[format.length-1])) {
-				     i = type.get(format[format.length-1])+1;
-				     type.put(format[format.length-1], i);
+				     x = type.get(format[format.length-1])+1;
+				     type.put(format[format.length-1], x);
 			      }
-				else type.put(format[format.length-1], ++i);
+				else type.put(format[format.length-1], ++x);
 			}
 		}
 		if(type.isEmpty())  throw new SubfolderNotFoundException();
@@ -222,24 +266,25 @@ public class Statistics {
 	 */
 	public static HashMap<String, Integer> getDeletedFileType(List<RecordDeleted> records, String subfolder) throws SubfolderNotFoundException{
 		HashMap<String, Integer> type = new HashMap<String, Integer>();
+	    
 		for(Record r:records) {
-			Integer i=0;
+			Integer x=0;
 			String[] format = r.getName().split(Pattern.quote("."));
 			if(!subfolder.isEmpty()) {    //controllo se la sottocartella è vuota o no
 				   if(r.getPath_lower().contains(subfolder)) {    //se non è vuota controllo se il file sia dentro la cartella
 				      if(type.containsKey(format[format.length-1])) {  //controllo se in type è già presente un file di quel formato.. format[format.length-1] sarebbe il formato del file preso in considerazione in questa iterazione del for-each
-					     i = type.get(format[format.length-1])+1;      //se è già presente incremento di uno il contatore di quel formato specifico, contatore ovvero la variabile i
-					     type.put(format[format.length-1], i);         //inserisco nell'HashMap type il nuovo valore di i associato al suo formato
+					     x = type.get(format[format.length-1])+1;      //se è già presente incremento di uno il contatore di quel formato specifico, contatore ovvero la variabile i
+					     type.put(format[format.length-1], x);         //inserisco nell'HashMap type il nuovo valore di i associato al suo formato
 				      }
-				      else type.put(format[format.length-1], ++i);     //se non è presente quel formato inserisco in type il formato con il suo contatore i che lo vado a preincrementare(per settarlo a 1 essendo prima a 0 perchè non era presente quel formato)
+				      else type.put(format[format.length-1], ++x);     //se non è presente quel formato inserisco in type il formato con il suo contatore i che lo vado a preincrementare(per settarlo a 1 essendo prima a 0 perchè non era presente quel formato)
 				   }
 			}
 			else {   //se subfolder è vuota, prendo tutti i file della lista
 					if(type.containsKey(format[format.length-1])) {
-					     i = type.get(format[format.length-1])+1;
-					     type.put(format[format.length-1], i);
+					     x = type.get(format[format.length-1])+1;
+					     type.put(format[format.length-1], x);
 				    }
-					else type.put(format[format.length-1], ++i);
+					else type.put(format[format.length-1], ++x);
 			}
 		}
 		if(type.isEmpty())  throw new SubfolderNotFoundException();

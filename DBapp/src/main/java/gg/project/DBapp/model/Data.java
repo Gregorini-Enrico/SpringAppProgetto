@@ -101,5 +101,33 @@ public class Data {
 	   		 }
 	   	 return files;
 		 }
+	 
+	 public static ArrayList<RecordFolder> getOnlyFolder(Parser p){
+		 RecordFolder folder = null;
+		 ArrayList<RecordFolder> folders = new ArrayList<RecordFolder>();
+		 if(p.entries.size() > 0)
+	   		 for(HashMap<String,Object> rf : p.entries) {
+	   			 folder = new RecordFolder();
+	   			folder.setTag((String)rf.get(".tag"));
+	   			if(folder.getTag().equals("folder")) {
+	   			     folder.setName((String)rf.get("name"));
+	   			     folder.setPath_lower((String)rf.get("path_lower"));
+	   			     folder.setId((String)rf.get("id"));
+	   			     folders.add(folder);
+	   			 }
+	   		 }
+		 return folders;
+	 }
+	 
 }
+
+
+
+
+
+
+
+
+
+
 	

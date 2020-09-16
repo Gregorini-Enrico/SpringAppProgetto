@@ -146,4 +146,66 @@ public class Storage {
 		}
 		return Data.getOnlyFile(p);  //restituisco la lista di file con tutti i campi riempiti
 	}
+	
+	
+	/**
+	 * Metodo che restituisce tutti le cartelle presenti 
+	 * @return lista di RecordFolder
+	 * @author Enrico Gregorini
+	 * @author Daniele Gjeka 
+	 */
+	public static ArrayList<RecordFolder> downloadFolder() {
+
+		String url = "https://api.dropboxapi.com/2/files/list_folder";
+		Parser p = null;
+		try {
+
+			HttpURLConnection openConnection = (HttpURLConnection) new URL(url).openConnection();
+			openConnection.setRequestMethod("POST");
+			openConnection.setRequestProperty("Authorization",
+					"Bearer TTT_mp4F8uIAAAAAAAAAAfg7FoYwmgEPuELIrV7zBJvObmJE_0MO9HTvN1uB2SB7");
+			openConnection.setRequestProperty("Content-Type", "application/json");
+			openConnection.setRequestProperty("Accept", "application/json");
+			openConnection.setDoOutput(true);
+			String jsonBody = "{\r\n" + 
+					"    \"path\": \"\",\r\n" + 
+					"    \"recursive\": true,\r\n" + 
+					"    \"include_media_info\": true,\r\n" + 
+					"    \"include_deleted\": true,\r\n" + 
+					"    \"include_mounted_folders\": true\r\n" + 
+					"}";
+			
+
+			try (OutputStream os = openConnection.getOutputStream()) {
+				byte[] input = jsonBody.getBytes("utf-8");
+				os.write(input, 0, input.length);
+			}
+
+			InputStream in = openConnection.getInputStream();
+
+			String data = ""; 
+			String line = "";
+			try {
+				InputStreamReader inR = new InputStreamReader(in);
+				BufferedReader buf = new BufferedReader(inR);
+
+				while ((line = buf.readLine()) != null) {
+					data += line; 							//tutti i dati presi dall'API in stringa
+				}
+			} finally {
+				in.close();
+			}
+			
+			ObjectMapper obj = new ObjectMapper();		//inizializzo ObjectMapper
+			p = obj.readValue(data, Parser.class);		//Effettuo il parsing dei dati attraverso obj (passando data)
+			 											//e inserisco i dati dentro il parser (parser.class)
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Data.getOnlyFolder(p);  //restituisco la lista di cartelle
+	}
+	
+	
 }
