@@ -102,21 +102,28 @@ public class Data {
 	   	 return files;
 		 }
 	 
+	 
+	 /**
+	  * Metodo che ritorna solo le cartelle presenti nell'account dropbox (senza cartelle)
+	  * serve per le statistiche  
+	  * @param p Parser che contiene tutti i file dalla chiamata list_folder
+	  * @return files ArrayList di RecordFolder che contiene tutta la lista dei file presenti(non eliminati)
+	  */
 	 public static ArrayList<RecordFolder> getOnlyFolder(Parser p){
 		 RecordFolder folder = null;
-		 ArrayList<RecordFolder> folders = new ArrayList<RecordFolder>();
+		 ArrayList<RecordFolder> folders = new ArrayList<RecordFolder>(); 
 		 if(p.entries.size() > 0)
 	   		 for(HashMap<String,Object> rf : p.entries) {
-	   			 folder = new RecordFolder();
+	   			 folder = new RecordFolder();  //inizializzo il nuovo oggetto RecordFolder
 	   			folder.setTag((String)rf.get(".tag"));
 	   			if(folder.getTag().equals("folder")) {
 	   			     folder.setName((String)rf.get("name"));
 	   			     folder.setPath_lower((String)rf.get("path_lower"));
 	   			     folder.setId((String)rf.get("id"));
-	   			     folders.add(folder);
+	   			     folders.add(folder);  
 	   			 }
 	   		 }
-		 return folders;
+		 return folders;  //ritorno la lista delle cartelle
 	 }
 	 
 }
