@@ -35,11 +35,11 @@ Package che contiene il controller dell'applicazione, ovvero la classe che gesti
 
 ### gg.project.DBapp.Storage  <br> <br>
 Package che gestisce il download dei dati direttamente dalle chiamate alla dropbox API.
-![Storage class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/Storage.PNG)
+![Storage class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/StorageUpdate.PNG)
 
 ### gg.project.DBapp.model  <br> <br>
 Package che contiene tutte le classi che servono a parsare i dati ottenuti (Parser, DeletedParser) e a implementare un oggetto, file dropbox, tramite la classe Record e sue figlie.
-![Model class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/Model.PNG)
+![Model class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/ModelUpdate.PNG)
 
 ### gg.project.DBapp.service  <br> <br>
 Package che restituisce i dati che andranno poi passati al controller (e quindi in risposta all'utente) e interpreta i filtri in formato JSON, inseriti nelle richieste POST.
