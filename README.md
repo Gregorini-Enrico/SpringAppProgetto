@@ -15,7 +15,7 @@ Per mostrare tutti questi passi al meglio, mostriamo il diagramma UML dei casi d
 
 ![Immagine del diagramma dei casi d'uso](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Use%20Case%20Diagram.PNG)
 
-# 1° passo: UML CLASS DIAGRAM
+# UML CLASS DIAGRAM
 La prima parte del lavoro è stata quella di pensare a come strutturare il progetto e per fare ciò ci è stato molto utile, l'UML ovvero Unified Modeling Language. In questa prima parte abbiamo iniziato a pensare al funzionamento della nostra applicazione: 
 1. acquisizione dei dati dall'API dropbox 
 2. parsing di quest'ultimi in liste di Record creati ad hoc per i nostri scopi 
