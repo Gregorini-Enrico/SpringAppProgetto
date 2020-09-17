@@ -20,7 +20,7 @@ public class Statistics {
 	 * se subfolder è vuota viene presa la cartella principale
 	 * @param records lista dei Record da analizzare
 	 * @param subfolder sottocartella scelta dall'utente
-	 * return float media della dimensione dei file
+	 * @return media della dimensione dei file in MB
 	 * @throws SubfolderNotFoundException 
 	 * @author Enrico gregorini
 	 * @author Daniele Gjeka
@@ -61,9 +61,9 @@ public class Statistics {
 	/**
 	 * Metodo per calcolare la media delle dimensioni dei file presenti nella cartella inserita dall'utente
 	 * se subfolder è vuota viene presa la cartella principale
-	 * @param records lista dei Record da analizzare
+	 * @param Drecords lista dei Record da analizzare
 	 * @param subfolder sottocartella scelta dall'utente
-	 * return float media della dimensione dei file
+	 * @return media della dimensione dei file in MB
 	 * @throws SubfolderNotFoundException 
 	 * @author Enrico gregorini
 	 * @author Daniele Gjeka
@@ -153,9 +153,9 @@ public class Statistics {
 	
 	/**
 	 * Metodo che restituisce il file con la dimensione più piccola
-	 * @param Drecords lista di file presenti
+	 * @param records lista di file presenti
 	 * @param subfolder sottocartella scelta dall'utente 
-	 * @return min file più grande
+	 * @return min file più piccolo
 	 * @throws SubfolderNotFoundException
 	 * @author Enrico gregorini
 	 * @author Daniele Gjeka
@@ -216,8 +216,10 @@ public class Statistics {
 	 * se subfolder è vuota prende la cartella principale
 	 * @param records tutti i file presenti
 	 * @param subfolder cartella dove effettuare la statistica
-	 * @return type HashMap<String, Integer> tabella che rappresenta quanti file sono presenti per ogni tipo nella cartella scelta
+	 * @return type tabella che rappresenta quanti file sono presenti per ogni tipo nella cartella scelta
 	 * @throws SubfolderNotFoundException 
+	 * @author Enrico gregorini
+	 * @author Daniele Gjeka
 	 */
 	public static HashMap<String, Integer> getFileType(List<RecordFile> records, String subfolder) throws SubfolderNotFoundException{
 		HashMap<String, Integer> type = new HashMap<String, Integer>();
@@ -263,6 +265,8 @@ public class Statistics {
 	 * @param subfolder cartella dove effettuare la statistica
 	 * @return type HashMap<String, Integer> tabella che rappresenta quanti file sono presenti per ogni tipo nella cartella scelta
 	 * @throws SubfolderNotFoundException 
+	 * @author Enrico gregorini
+	 * @author Daniele Gjeka
 	 */
 	public static HashMap<String, Integer> getDeletedFileType(List<RecordDeleted> records, String subfolder) throws SubfolderNotFoundException{
 		HashMap<String, Integer> type = new HashMap<String, Integer>();

@@ -16,7 +16,8 @@ public class DateFilter {
 	/**
 	 * Metodo per convertire tutti i campi client_modified da String a Date associandoli al corrispondente file eliminato
 	 * @param records lista di tutti i file eliminati
-	 * @return files HashMap<RecordDeleted,Date> record associato a una variabile Date che corrisponde al campo client_modified
+	 * @return HashMap<RecordDeleted,Date> tabella in cui ogni record e' associato a una variabile Date che corrisponde al campo client_modified
+	 * @author Enrico Gregorini
 	 */
 	@SuppressWarnings("deprecation")
 	public static HashMap<RecordDeleted,Date> StringToDateDeleted(List<RecordDeleted> records){
@@ -42,7 +43,8 @@ public class DateFilter {
 	/**
 	 * Metodo per convertire tutti i campi client_modified da String a Date associandoli al corrispondente file 
 	 * @param records lista di tutti i file
-	 * @return files HashMap<RecordFile,Date> record associato a una variabile Date che corrisponde al campo client_modified
+	 * @return HashMap<RecordFile,Date> record associato a una variabile Date che corrisponde al campo client_modified
+	 * @author Enrico Gregorini
 	 */
 	@SuppressWarnings("deprecation")
 	public static HashMap<RecordFile,Date> StringToDateFile(List<RecordFile> records){  //client_modified = "2020-08-24T07:42:07Z"
@@ -72,7 +74,8 @@ public class DateFilter {
 	 * Metodo per filtrare tutti i file modificati prima della data passata dall'utente
 	 * @param files HashMap di RecordDeleted con associato la data ad esso corrispondente
 	 * @param data passata dall'utente
-	 * @return filtered lista filtrata dei file eliminati
+	 * @return List<RecordDeleted> lista filtrata dei file eliminati
+	 * @author Enrico Gregorini
 	 */
 	@SuppressWarnings("deprecation")
 	public static List<RecordDeleted> beforeDate(List<RecordDeleted> files, String data){
@@ -102,7 +105,8 @@ public class DateFilter {
 	 * Metodo per filtrare tutti i file modificati prima della data passata dall'utente
 	 * @param files HashMap di RecordFile con associato la data ad esso corrispondente
 	 * @param data passata dall'utente
-	 * @return filtered lista filtrata dei file presenti
+	 * @return List<RecordFile> lista filtrata dei file presenti
+	 * @author Enrico Gregorini
 	 */
 	@SuppressWarnings("deprecation")
 	public static List<RecordFile> beforeDateFile(List<RecordFile> files, String data){
@@ -135,7 +139,8 @@ public class DateFilter {
 	 * Metodo per filtrare tutti i file modificati dopo della data passata dall'utente
 	 * @param files HashMap di RecordDeleted con associato la data ad esso corrispondente
 	 * @param data passata dall'utente
-	 * @return filtered lista filtrata dei file eliminati
+	 * @return List<RecordDeleted> lista filtrata dei file eliminati
+	 * @author Enrico Gregorini
 	 */
 	@SuppressWarnings("deprecation")
 	public static List<RecordDeleted> afterDate(List<RecordDeleted> files, String data){
@@ -166,7 +171,8 @@ public class DateFilter {
 	 * Metodo per filtrare tutti i file modificati dopo della data passata dall'utente
 	 * @param files HashMap di RecordFile con associato la data ad esso corrispondente
 	 * @param data passata dall'utente
-	 * @return filtered lista filtrata dei file presenti
+	 * @return List<RecordFile> lista filtrata dei file presenti
+	 * @author Enrico Gregorini
 	 */
 	@SuppressWarnings("deprecation")
 	public static List<RecordFile> afterDateFile(List<RecordFile> files, String data){
@@ -195,8 +201,10 @@ public class DateFilter {
 	/**
 	 * Metodo per filtrare tutti i file modificati nell'intervallo delle due date passate dall'utente
 	 * @param files HashMap di RecordFile con associato la data ad esso corrispondente
-	 * @param le due date passate dall'utente
-	 * @return filtered lista filtrata dei file eliminati
+	 * @param date data inserita dall'utente
+	 * @param date le due date passate dall'utente
+	 * @return List<RecordDeleted> lista filtrata dei file eliminati
+	 * @author Enrico Gregorini
 	 */
 	@SuppressWarnings("deprecation")
 	public static List<RecordDeleted> betweenDate(List<RecordDeleted> files, String date){ //es. date = [01/08/2020, 01/09/2020]
@@ -239,8 +247,9 @@ public class DateFilter {
 	/**
 	 * Metodo per filtrare tutti i file modificati nell'intervallo delle due date passate dall'utente
 	 * @param files HashMap di RecordFile con associato la data ad esso corrispondente
-	 * @param le due date passate dall'utente
-	 * @return filtered lista filtrata dei file presenti
+	 * @param date le due date passate dall'utente
+	 * @return List<RecordFile> lista filtrata dei file presenti
+	 * @author Enrico Gregorini
 	 */
 	@SuppressWarnings("deprecation")
 	public static List<RecordFile> betweenDateFile(List<RecordFile> files, String date){//es. date = [01/08/2020, 01/09/2020]		

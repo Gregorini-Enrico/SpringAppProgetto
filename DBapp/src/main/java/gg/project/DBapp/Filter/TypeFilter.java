@@ -17,7 +17,9 @@ public class TypeFilter {
 	       * metodo che restituisce tutti i file eliminati del tipo definito dalla variabile type
 	       * @param records lista di tutti i file eliminati 
 	       * @param type tipo passato dall'utente
-	       * @return records lista filtrata in base al tipo
+	       * @return List<RecordDeleted> lista filtrata in base al tipo
+	       * @author Enrico Gregorini
+	       * @author Daniele Gjeka
 	       */
 	      public static List<RecordDeleted> typeDeleted(List<RecordDeleted> records, String type) {
 	    	  records.removeIf(r->(!r.getName().contains(type)));  //rimuovo dalla lista se il nome contiene il tipo passato dall'utente
@@ -29,7 +31,9 @@ public class TypeFilter {
 	       * metodo che restituisce tutti i file del tipo definito dalla variabile type
 	       * @param records lista di tutti i file presenti 
 	       * @param type tipo passato dall'utente
-	       * @return records lista filtrata in base al tipo
+	       * @return List<RecordFile> lista filtrata in base al tipo
+	       * @author Enrico Gregorini
+	       * @author Daniele Gjeka
 	       */
 	      public static List<RecordFile> type(List<RecordFile> records, String type) {
 	    	  records.removeIf(r->(!r.getName().contains(type)));   //rimuovo dalla lista se il nome contiene il tipo passato dall'utente

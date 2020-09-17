@@ -23,7 +23,7 @@ public class FilterService {
 	 * Metodo che decodifica il filtro passato adll'utente nella richiesta per il restore
 	 * @param rd  lista dei file cancellati
 	 * @param body  RequestBody della richiesta per il restore
-	 * @return  lista di file filtrata
+	 * @return List<RecordDeleted> lista di file eliminati filtrata
 	 * @author Enrico Gregorini
 	 * @author Daniele Gjeka
 	 */
@@ -65,7 +65,9 @@ public class FilterService {
 	 * Metodo che decodifica il filtro passato adll'utente nella richiesta per i filtri sui file presenti
 	 * @param rd  lista dei file presenti
 	 * @param body  RequestBody della richiesta per il restore
-	 * @return  lista di file filtrata
+	 * @return ArrayList<RecordFile> lista di file filtrata
+	 * @author Enrico Gregorini
+     * @author Daniele Gjeka
 	 */
 	@SuppressWarnings("unchecked")
 	public static List<RecordFile> filtringFile(List<RecordFile> rd, String body){

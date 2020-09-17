@@ -16,6 +16,8 @@ public class Data {
 	 * prende tutti i Record, quindi sia file che cartelle che file eliminati
 	 * @param p Parser che contiene tutti i file dalla chiamata list_folder
 	 * @return ArrayList<Record> records, lista di tutti i Record 
+	 * @author Enrico Gregorini
+     * @author Daniele Gjeka
 	 */
 	public static ArrayList<Record> getRecords(Parser p){
    	 Record r = null;
@@ -46,7 +48,7 @@ public class Data {
     /**
      * Metodo che memorizza tutti i campi dei file eliminati dopo la list_revision SENZA DUPLICATI
      * @param dp arraylist di DeletedParser che contiene tutti i file eliminati dalla riposta alla richiesta list_revision all'API di dropbox
-     * @return recordsdeleted lista di file eliminati senza duplicati
+     * @return ArrayList<RecordDeleted> lista di file eliminati senza duplicati
      * @author Enrico Gregorini
      * @author Daniele Gjeka
      */
@@ -80,7 +82,9 @@ public class Data {
 	  * Metodo che ritorna solo i file presenti nell'account dropbox (senza cartelle)
 	  * serve per le statistiche e i filtri 
 	  * @param p Parser che contiene tutti i file dalla chiamata list_folder
-	  * @return files ArrayList di RecordFile che contiene tutta la lista dei file presenti(non eliminati)
+	  * @return ArrayList<RecordFile> che contiene tutta la lista dei file presenti(non eliminati)
+	  * @author Enrico Gregorini
+      * @author Daniele Gjeka
 	  */
 	 public static ArrayList<RecordFile> getOnlyFile(Parser p){
 		 RecordFile file = null;
@@ -107,7 +111,9 @@ public class Data {
 	  * Metodo che ritorna solo le cartelle presenti nell'account dropbox (senza cartelle)
 	  * serve per le statistiche  
 	  * @param p Parser che contiene tutti i file dalla chiamata list_folder
-	  * @return files ArrayList di RecordFolder che contiene tutta la lista dei file presenti(non eliminati)
+	  * @return ArrayList<RecordFolder> che contiene tutta la lista dei file presenti(non eliminati)
+	  * @author Enrico Gregorini
+	  * @author Daniele Gjeka
 	  */
 	 public static ArrayList<RecordFolder> getOnlyFolder(Parser p){
 		 RecordFolder folder = null;

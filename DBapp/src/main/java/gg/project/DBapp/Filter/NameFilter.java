@@ -16,8 +16,11 @@ public class NameFilter {
 	
 	/**
 	 * metodo che ritorna il file con il path scelto dall'utente
+	 * @param records lista di file 
 	 * @param path del file selezionato
-	 * @return RecordToRestore file scelto dall'utente
+	 * @return List<RecordDeleted> file scelto dall'utente
+	 * @author Enrico Gregorini
+	 * @author Daniele Gjeka
 	 */
 	public static List<RecordDeleted> getFileDeleted(List<RecordDeleted> records, String path) {
 		ArrayList<RecordDeleted> RecordtoRestore = new ArrayList<RecordDeleted>();
@@ -32,8 +35,11 @@ public class NameFilter {
 	
 	/**
 	 * metodo che ritorna il file con il path scelto dall'utente
+	 * @param records lista di file 
 	 * @param path del file selezionato
-	 * @return RecordToRestore file scelto dall'utente
+	 * @return List<RecordFile> file scelto dall'utente
+	 * @author Enrico Gregorini
+	 * @author Daniele Gjeka
 	 */
 	public static List<RecordFile> getFile(List<RecordFile> records, String path) {
 		ArrayList<RecordFile> RecordtoRestore = new ArrayList<RecordFile>();

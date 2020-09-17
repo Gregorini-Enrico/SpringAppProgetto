@@ -17,7 +17,7 @@ public class PrincipalService {
 
 	/**
 	 * Metodo per ritornare la lista di tutti i record(sia file che cartelle)
-	 * @return lista di Record
+	 * @return ArrayList<Record>
 	 * @author Enrico Gregorini
 	 * @author Daniele Gjeka
 	 */
@@ -27,7 +27,7 @@ public class PrincipalService {
 	
 	/**
 	 * Metodo per ritornare la lista di tutti i file eliminati 
-	 * @return lista di RecordDeleted
+	 * @return ArrayList<RecordDeleted>
 	 * @author Enrico Gregorini
 	 * @author Daniele Gjeka
 	 */
@@ -48,7 +48,7 @@ public class PrincipalService {
 	/**
 	 * Metodo che effettua il restore dei file scelti
 	 * @param body JSON passato dall'utente per filtrare i dati
-	 * @return true se il restore è stato effettuato con successo, false in caso contrario
+	 * @return boolean true se il restore è stato effettuato con successo, false in caso contrario
 	 * @author Enrico Gregorini
 	 * @author Daniele Gjeka
 	 */
@@ -60,7 +60,7 @@ public class PrincipalService {
 	/**
 	 * Metodo che restituisce i file eliminati filtrati in base alle scelte dell'utente
 	 * @param filter JSON passato dall'utente per filtrare i dati
-	 * @return lista di RecordDeleted
+	 * @return ArrayList<RecordDeleted> 
 	 * @author Enrico Gregorini
 	 * @author Daniele Gjeka
 	 */
@@ -71,7 +71,7 @@ public class PrincipalService {
 	/**
 	 * Metodo che restituisce i file eliminati presenti in base alle scelte dell'utente
 	 * @param filter JSON passato dall'utente per filtrare i dati
-	 * @return lista di RecordFile
+	 * @return ArrayList<RecordFile>
 	 * @author Enrico Gregorini
 	 * @author Daniele Gjeka
 	 */

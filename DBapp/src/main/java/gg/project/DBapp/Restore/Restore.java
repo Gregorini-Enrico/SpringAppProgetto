@@ -22,7 +22,7 @@ public class Restore {
 	 * Metodo che effettua la chiamata POST alla rotta https://api.dropboxapi.com/2/files/restore per il restore dei file
 	 * a questo metodo viene passata la lista già filtrata dei file che si vogliono ripristinare
 	 * @param FilteredList lista filtrata di file eliminati
-	 * @return true se l'operazione è avvenuta con successo, false se non è avvenuta con successo
+	 * @return boolean true se l'operazione è avvenuta con successo, false se non è avvenuta con successo
 	 * @author Enrico Gregorini
      * @author Daniele Gjeka
 	 */
@@ -46,7 +46,7 @@ public class Restore {
 					"}";
             
 
-			try (OutputStream os = openConnection.getOutputStream()) {
+			try (OutputStream os = openConnection.getOutputStream()) {  //effettuo la chiamata all'API dropbox
 				byte[] input = jsonBody.getBytes("utf-8");
 				os.write(input, 0, input.length);
 			}
@@ -69,7 +69,7 @@ public class Restore {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(data.isEmpty()) return false;
+		if(data.isEmpty()) return false;   //se la risposta alla chiamata è vuota, significa che l'operazione non è avvenuta con successo
 		else return true;
 		}
 	
