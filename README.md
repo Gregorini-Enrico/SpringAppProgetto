@@ -2,7 +2,7 @@
 Questo è il repository che contiene il progetto svolto da Enrico Gregorini e Daniele Gjeka per l'esame di Programmazione A Oggetti per il secondo anno di Ingegneria Informatica e dell'Automazione
 
 # Introduzione
-Il progetto consiste in una SpringBoot application, creata nell'ambiente java, usando l'IDE eclipse, che permette di modellare e acquisire dati da una API esterna. Il nostro macrotema infatti essendo la Dropbox API, abbiamo dovuto attraverso quest'ultima, autenticarci così da ottenere indietro dati corrispondenti ai file presenti nell'account dropbox e nella cartella associata. Il nostro obiettivo era quello di: a partire dalla lista dei file cancellati in una cartella Dropbox, di effettuare il restore degli stessi dando la possibilità all'utente di scegliere il file, il tipo di file o gli intervalli temporali rispetto alla data di cancellazione dei file di cui effettuare il restore. 
+Il progetto consiste in una SpringBoot application, creata nell'ambiente java, usando l'IDE eclipse, che permette di acquisire e modellare dati da una API esterna. Abbiamo dovuto attraverso la dropbox API, che era proprio il nostro macrotema, autenticarci così da ottenere dati corrispondenti ai file presenti nell'account dropbox e nella cartella associata. Il nostro obiettivo era quello di: a partire dalla lista dei file cancellati in una cartella Dropbox, di effettuare il restore degli stessi dando la possibilità all'utente di scegliere il file, il tipo di file o gli intervalli temporali rispetto alla data di cancellazione dei file di cui effettuare il restore. 
 
 Tutto questo è possibile grazie a delle chiamate specifiche fatte all'API dropbox quali: 
 * /files/list_folder: per ricevere tutti i file/cartelle presenti nella cartella dropbox presa in riferimento attraverso il token d'accesso;
@@ -16,7 +16,7 @@ Per mostrare tutti questi passi al meglio, mostriamo il diagramma UML dei casi d
 ![Immagine del diagramma dei casi d'uso](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Use%20Case%20Diagram.PNG)
 
 # UML CLASS DIAGRAM
-La prima parte del lavoro è stata quella di pensare a come strutturare il progetto e per fare ciò ci è stato molto utile, l'UML ovvero Unified Modeling Language. In questa prima parte abbiamo iniziato a pensare al funzionamento della nostra applicazione: 
+La prima parte del lavoro è stata quella di pensare a come strutturare il progetto e per fare ciò ci è stato molto utile il linguaggio UML (Unified Modeling Language). In questa prima parte abbiamo iniziato a pensare al funzionamento della nostra applicazione: 
 1. acquisizione dei dati dall'API dropbox 
 2. parsing di quest'ultimi in liste di Record creati ad hoc per i nostri scopi 
 3. analisi delle informazioni accumulate attraverso statistiche e filtri 
@@ -42,7 +42,7 @@ Package che contiene tutte le classi che servono a parsare i dati ottenuti (Pars
 ![Model class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/ModelUpdate.PNG)
 
 ### gg.project.DBapp.service  <br> <br>
-Package che restituisce i dati che andranno poi passati al controller (e quindi in risposta all'utente) e interpreta i filtri in formato JSON, inseriti nelle richieste POST.
+Package che implementa i servizi resi disponibili attraverso l'applicazione, e che poi verranno richiamati nel controller (e quindi in risposta all'utente), e interpreta i filtri in formato JSON, inseriti nelle richieste POST.
 
 ![Service class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/Service.PNG)
 
@@ -78,23 +78,23 @@ Mostriamo ora come utilizzare l'applicazione attraverso le sue chiamate e come q
 | /filter | POST | per filtrare la ricerca attraverso vari campi |
 | /restore | POST | per ripristinare file scelti dall'utente attraverso filtri |
 
-Di seguito mostriamo il diagramma delle sequenze di una delle prime chiamate, ovvero quella che restituisce la lista di tutti i file presenti nella cartella principale dropbox, quindi senza distinzioni di tipo (sia file, file eliminati che cartelle).
+Di seguito mostriamo il diagramma delle sequenze di una delle prime chiamate, ovvero quella che restituisce la lista di tutti i file presenti nella cartella principale dropbox, quindi senza distinzioni di tipo (sia file, file eliminati che cartelle): alla rotta <B> localhost:8080/files </B>
 
 ![getFiles use case diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Sequence%20Diagram/file.PNG)
 
 ## Statistiche 
 
-L'applicazione analizza i file presenti in dropbox e effettua statistiche su di essi. Le statistiche vengono effettuate attraverso richieste GET a diverse rotte che a questo indirizzo localhost:8080/statistics/ di seguito poi la rotta che si preferisce. <br>
+L'applicazione analizza i file presenti in dropbox e effettua statistiche su di essi. Le statistiche vengono effettuate attraverso richieste GET a questo indirizzo <B> localhost:8080/statistics/ </B> seguito poi dalla rotta che si preferisce in base a quale sia la statistica desiderata. <br>
 Ci sono dei parametri da immettere per personalizzare quest'ultime, quali:
-* file: definisce se la statistica che si vuole effettuare, deve essere fatta sui file presenti inserendo <B> "file" </B> oppure inserendo <B> "deleted" </B> essa verrà eseguita sui file eliminati
-* subfolder: se inserita la statistica viene effettuata solo per i file presenti nella sottocartella, in caso contrario i file vengono presi direttamente dalla cartella principale 
+* file: definisce se la statistica che si vuole effettuare deve essere fatta sui file presenti, se così fosse si deve inserire <B> "file" </B>, oppure inserendo <B> "deleted" </B> essa verrà eseguita sui file eliminati
+* subfolder: se inserita, la statistica viene effettuata solo per i file presenti nella sottocartella indicata, in caso contrario i file vengono presi direttamente dalla cartella principale 
 
 | ROTTA | PARAMS | DESCRIZIONE |
 |-|-|-|
 | /statistics/media | file, subfolder | restituisce la dimensione media dei file in MB |
 | /statistics/max | file, subfolder | restituisce il file con la dimensione maggiore |
 | /statistics/min | file, subfolder | restituisce il file con la dimensione minore |
-| /statistics/type | file , subfolder | restituisce una tabella che mostra quanti file <br>sono presenti nella cartella scelta per ogni tipo |
+| /statistics/type | file , subfolder | restituisce una tabella che mostra quanti file <br>sono presenti nella cartella scelta, per ogni tipo |
 
 ![getStats use case diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Sequence%20Diagram/statis%20type.PNG)
 
@@ -107,9 +107,9 @@ Vi sono tre diverse tipologie di filtri in base al campo che si sceglie:
 |-|-|-|-|
 | path | file | "path": "<U>percorso del file</U>" | restituisce il file al percorso desiderato |
 | type | file | "type": "<U> tipo del file </U>" | restituisce tutti i file del tipo inserito |
-| date | file | "date": {"after" : "<U> data </U>"}<br>  "date": {"before" : "<U> data </U>"}<br>  "date": {"between" : <U>["data1", "data2"]</U> | restituisce i file modificati dopo della data inserita <br>restituisce i file modificati prima della data inserita <br>restituisce i file modificati durante l'intervallo inserito |
+| date | file | "date": {"after" : "<U> data </U>"}<br>  "date": {"before" : "<U> data </U>"}<br>  "date": {"between" : <U>["data1", "data2"]</U> | restituisce i file modificati dopo la data inserita <br>restituisce i file modificati prima della data inserita <br>restituisce i file modificati durante l'intervallo inserito |
 
-Per rendere più chiare queste chiamate mostriamo il diagramma delle sequenze, nel caso in cui l'utente scelga di filtrare il campo type (mostriamo questo esempio perchè in sostanza quello che fa l'applicazione è molto simile in tutti i casi, cambiando semplicemente l'ultima classe che gestisce il filtro del proprio campo) <br>
+Per rendere più chiare queste chiamate mostriamo il diagramma delle sequenze, nel caso in cui l'utente scelga di filtrare il campo type (per brevità mostriamo questo esempio perchè in sostanza quello che fa l'applicazione è molto simile in tutti i casi, cambiando semplicemente l'ultima classe che gestisce il filtro del proprio campo) <br>
 ![getStats use case diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Sequence%20Diagram/filter%20seq.PNG)
 
 ## Restore
@@ -127,7 +127,7 @@ Di seguito mostriamo il diagramma delle sequenze per la chiamata che effettua il
 Il lavoro mostrato è stato sviluppato per la maggior parte insieme, sia di persona che in via telematica. Ci sono state parti del progetto su cui ha lavorato maggiormente 
 uno e altre prese in carico dall'altro componente, infatti: 
 * Daniele Gjeka ha elaborato tutti i diagrammi UML (tramite UML designer), commentato il codice e generato la documentazione javadoc.
-* Enrico Gregorini ha sviluppato la parte delle statistiche e filtri.
+* Enrico Gregorini ha sviluppato la parte delle statistiche e dei filtri.
 Il resto del lavoro è stato svolto insieme così da rimanere sempre aggiornati passo passo sugli avanzamenti del progetto. 
 
 
