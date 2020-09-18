@@ -29,37 +29,44 @@ Per fare tutto ciò abbiamo iniziato a pensare ai vari pacchetti che ci sarebber
 Ovviamente in seguito per ogni pacchetto abbiamo sviluppato tutte le varie classi che andavano ad implementare il progetto, così facendo abbiamo creato l'UML Class Diagram.
 
 
-### gg.project.DBapp.controller  <br> <br> 
+### gg.project.DBapp.controller  <br> 
 Package che contiene il controller dell'applicazione, ovvero la classe che gestisce tutte le chiamate GET o POST dell'utente.
+
 ![controller class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/Controller.PNG)
 
-### gg.project.DBapp.Storage  <br> <br>
+### gg.project.DBapp.Storage  <br> 
 Package che gestisce il download dei dati direttamente dalle chiamate alla dropbox API.
+
 ![Storage class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/StorageUpdate.PNG)
 
-### gg.project.DBapp.model  <br> <br>
+### gg.project.DBapp.model  <br> 
 Package che contiene tutte le classi che servono a parsare i dati ottenuti (Parser, DeletedParser) e a implementare un oggetto, file dropbox, tramite la classe Record e sue figlie.
+
 ![Model class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/ModelUpdate.PNG)
 
-### gg.project.DBapp.service  <br> <br>
+### gg.project.DBapp.service  <br> 
 Package che implementa i servizi resi disponibili attraverso l'applicazione, e che poi verranno richiamati nel controller (e quindi in risposta all'utente), e interpreta i filtri in formato JSON, inseriti nelle richieste POST.
 
 ![Service class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/Service.PNG)
 
-### gg.project.DBapp.Stats <br> <br>
-Package che implementa le statistiche sui file presenti nelle varie cartelle dropbox. <br>
+### gg.project.DBapp.Stats <br> 
+Package che implementa le statistiche sui file presenti nelle varie cartelle dropbox. 
+
 ![Stats class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/Statistics.PNG)
 
-### gg.project.DBapp.Filter <br> <br>
+### gg.project.DBapp.Filter <br> 
 Package che implementa i filtri: i filtri si possono applicare direttamente sul nome di file, sul tipo o sulla data di modifica.
+
 ![Filter class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/Filter.PNG)
 
-### gg.project.DBapp.Restore <br> <br>
+### gg.project.DBapp.Restore <br> 
 Package che implementa l'obiettivo dell'applicazione ovvero quello di effettuare il restore dei file scelti dall'utente in base ai filtri.
+
 ![Restore class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/Restore.PNG)
 
-### gg.project.DBapp.Exception <br> <br>
+### gg.project.DBapp.Exception <br> 
 Package che gestisce le varie eccezioni che possono essere lanciate all'interno del programma.
+
 ![Exception class diagram](https://github.com/Gregorini-Enrico/SpringAppProgetto/blob/new_master/Diag%20UML/Class%20Diagram/Exception.PNG)
 
 
